@@ -133,7 +133,18 @@ export default function Marketplace({
               Filter by your Hall, Faculty, Price, Rating, or Delivery Option. Verified student sellers only.
             </p>
           </div>
-          <ProductIllustration art="headphones" color="#0b462d" accent="#f58220" size={92} />
+          <img
+            src="/images/podium/campus-tech.jpg"
+            alt="Campus Essentials"
+            style={{
+              width: 140,
+              height: 96,
+              objectFit: 'cover',
+              borderRadius: 14,
+              boxShadow: '0 10px 24px rgba(15, 23, 42, 0.12)',
+              display: 'block',
+            }}
+          />
         </div>
       )}
 

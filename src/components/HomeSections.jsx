@@ -2,7 +2,15 @@ import React from 'react';
 import { ArrowRight, HelpCircle, CreditCard, MapPin, ShieldCheck, Sparkles } from 'lucide-react';
 import { CATEGORIES } from '../data/mockData';
 import ProductCard from './ProductCard';
-import ProductIllustration from './ProductIllustration';
+
+const CATEGORY_IMAGES = {
+  Food: '/images/food/bowl1.jpg',
+  Fashion: '/images/products/dunk-low.jpg',
+  Tech: '/images/products/airpods-max.jpg',
+  Services: '/images/products/laundry-bundle.jpg',
+  Tutoring: '/images/products/exam-prep.jpg',
+  Printing: '/images/products/thesis-binding.jpg',
+};
 
 export default function HomeSections({
   products,
@@ -36,12 +44,33 @@ export default function HomeSections({
               key={cat.id}
               type="button"
               className="category-tile"
-              style={{ background: cat.bg }}
+              style={{ background: '#181614', justifyContent: 'flex-end', alignItems: 'flex-start', textAlign: 'left' }}
               onClick={() => onBrowseCategory(cat.id)}
             >
-              <span>{cat.name}</span>
-              <ProductIllustration art={cat.art} color={cat.color} accent={cat.accent} size={76} />
-              <span style={{ fontSize: 11, fontWeight: 500, opacity: 0.9 }}>{cat.count}</span>
+              <img
+                src={CATEGORY_IMAGES[cat.id]}
+                alt={cat.name}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+              <div
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(180deg, rgba(15,23,42,0.08) 25%, rgba(15,23,42,0.82) 100%)',
+                }}
+              />
+              <span style={{ position: 'relative', zIndex: 1, fontSize: 16, fontWeight: 700 }}>{cat.name}</span>
+              <span style={{ position: 'relative', zIndex: 1, fontSize: 11, fontWeight: 500, opacity: 0.9 }}>
+                {cat.count}
+              </span>
             </button>
           ))}
         </div>
@@ -70,38 +99,75 @@ export default function HomeSections({
         </div>
       </section>
 
-      {/* 3. Grab Upto 50% Off Cream Promo Banner (Shopcart video 00:06) */}
-      <section className="cream-promo-banner">
-        <div style={{ maxWidth: 520 }}>
+      {/* 3. Grab Upto 50% Off Campus Tech Promo Banner */}
+      <section
+        className="cream-promo-banner"
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          background: '#181614',
+          minHeight: 240,
+        }}
+      >
+        <img
+          src="/images/podium/campus-tech.jpg"
+          alt="Selected Campus Tech"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+          }}
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background:
+              'linear-gradient(90deg, rgba(17, 16, 14, 0.86) 0%, rgba(17, 16, 14, 0.58) 54%, rgba(17, 16, 14, 0.18) 100%)',
+          }}
+        />
+        <div style={{ maxWidth: 520, position: 'relative', zIndex: 1 }}>
           <span
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: 6,
-              background: '#ffffff',
-              color: '#0b462d',
-              padding: '4px 12px',
+              background: 'rgba(255, 255, 255, 0.16)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.26)',
+              color: '#ffffff',
+              padding: '5px 12px',
               borderRadius: 999,
               fontSize: 12,
-              fontWeight: 700,
+              fontWeight: 600,
               marginBottom: 12,
             }}
           >
             <Sparkles size={13} /> CAMPUS FLASH DEAL
           </span>
-          <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.3rem)', color: '#0b462d', margin: '0 0 10px' }}>
+          <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.3rem)', color: '#ffffff', margin: '0 0 10px' }}>
             Grab Upto 50% Off On Selected Campus Tech
           </h2>
-          <p style={{ margin: '0 0 18px', color: '#475569', fontSize: 14 }}>
+          <p style={{ margin: '0 0 18px', color: 'rgba(255, 255, 255, 0.88)', fontSize: 14 }}>
             Student-tested headphones, laptop sleeves, and study gear with verified campus warranty.
           </p>
-          <button type="button" className="btn-primary" onClick={() => onBrowseCategory('Tech')}>
+          <button
+            type="button"
+            className="btn-primary"
+            style={{
+              background: '#ffffff',
+              color: '#141312',
+              border: 'none',
+            }}
+            onClick={() => onBrowseCategory('Tech')}
+          >
             Buy Now
           </button>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <ProductIllustration art="headphones" color="#0b462d" accent="#f58220" size={140} />
         </div>
       </section>
 
@@ -124,7 +190,11 @@ export default function HomeSections({
               <button type="button" className="btn-outline btn-sm" onClick={() => onBrowseCategory('Fashion')}>
                 Shop Fashion
               </button>
-              <ProductIllustration art="sneaker" color="#0b462d" accent="#f58220" size={96} />
+              <img
+                src="/images/products/dunk-low.jpg"
+                alt="North Hall Streetwear"
+                style={{ width: 96, height: 76, objectFit: 'cover', borderRadius: 12, display: 'block' }}
+              />
             </div>
           </div>
 
@@ -165,7 +235,11 @@ export default function HomeSections({
               <button type="button" className="btn-outline btn-sm" onClick={() => onBrowseCategory('Tutoring')}>
                 Explore Study
               </button>
-              <ProductIllustration art="tutoring" color="#1e3a8a" accent="#f58220" size={96} />
+              <img
+                src="/images/products/exam-prep.jpg"
+                alt="Finals Prep & Printing"
+                style={{ width: 96, height: 76, objectFit: 'cover', borderRadius: 12, display: 'block' }}
+              />
             </div>
           </div>
         </div>
@@ -238,8 +312,12 @@ export default function HomeSections({
       {/* 7. Elegance Craft Accent Bottom Banner (Catalog picture bottom right) */}
       <section className="elegance-banner">
         <div style={{ display: 'flex', alignItems: 'center', gap: 22, flexWrap: 'wrap' }}>
-          <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 20, padding: 14 }}>
-            <ProductIllustration art="sneaker" color="#fde047" accent="#f58220" size={115} />
+          <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 20, padding: 8 }}>
+            <img
+              src="/images/podium/sneakers.jpg"
+              alt="Elegance Craft Accent Campus Drops"
+              style={{ width: 124, height: 100, objectFit: 'cover', borderRadius: 14, display: 'block' }}
+            />
           </div>
           <div>
             <div style={{ fontSize: 12, fontWeight: 700, color: '#fde047', marginBottom: 6 }}>

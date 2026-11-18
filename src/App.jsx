@@ -38,9 +38,14 @@ function loadState(key, fallback) {
 function loadMergedProducts() {
   const saved = loadState('kc_products', null);
   if (!Array.isArray(saved)) return INITIAL_PRODUCTS;
-  const savedIds = new Set(saved.map((p) => p.id));
+  const defaultsById = new Map(INITIAL_PRODUCTS.map((p) => [p.id, p]));
+  const hydrated = saved.map((p) => {
+    const def = defaultsById.get(p.id);
+    return def && !p.image && def.image ? { ...p, image: def.image } : p;
+  });
+  const savedIds = new Set(hydrated.map((p) => p.id));
   const missing = INITIAL_PRODUCTS.filter((p) => !savedIds.has(p.id));
-  return [...saved, ...missing];
+  return [...hydrated, ...missing];
 }
 
 export default function App() {

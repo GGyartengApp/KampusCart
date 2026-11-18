@@ -401,15 +401,79 @@ button {
   flex-wrap: wrap;
 }
 
-/* Shopcart-inspired Sky Blue & Yellow Podium Banner */
+/* Dark Editorial Podium Banner */
 .shopcart-hero {
-  background: linear-gradient(125deg, #d7eff7 0%, var(--sky-banner) 52%, #b5e3f0 100%);
+  background: linear-gradient(180deg, #181614 0%, #0a0a09 24%, #000000 100%);
   position: relative;
   overflow: hidden;
-  padding: 46px 0;
+  padding: 64px 0 0;
+}
+
+@keyframes brandMarqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.brand-marquee-wrap {
+  margin-top: 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 18px 0;
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.brand-marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 48px;
+  animation: brandMarqueeScroll 28s linear infinite;
+}
+
+.brand-marquee-wrap:hover .brand-marquee-track {
+  animation-play-state: paused;
+}
+
+.brand-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.brand-marquee-item:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.brand-marquee-logo {
+  height: 36px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  display: block;
+}
+
+.brand-marquee-logo--invert {
+  filter: invert(1);
+  mix-blend-mode: screen;
+}
+
+.brand-marquee-logo--screen {
+  mix-blend-mode: screen;
 }
 
 .shopcart-hero-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
@@ -418,13 +482,13 @@ button {
 
 .shopcart-hero h2 {
   font-size: clamp(1.9rem, 3.8vw, 3.1rem);
-  color: var(--emerald);
+  color: #ffffff;
   margin: 0 0 14px;
   line-height: 1.12;
 }
 
 .shopcart-hero p {
-  color: #1e3a34;
+  color: rgba(255, 255, 255, 0.78);
   font-size: 15px;
   line-height: 1.6;
   max-width: 470px;
