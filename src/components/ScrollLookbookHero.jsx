@@ -336,23 +336,17 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
       {activeCallout && (
         <div
           key={activeCallout.id}
+          className="hero-float-card hero-float-card--callout"
           style={{
             position: 'absolute',
             zIndex: 5,
             ...activeCallout.pos,
-            background: 'rgba(24, 22, 20, 0.58)',
-            backdropFilter: 'blur(18px)',
-            WebkitBackdropFilter: 'blur(18px)',
-            border: '1px solid rgba(255, 255, 255, 0.25)',
-            color: '#ffffff',
-            borderRadius: 18,
             padding: '15px 18px',
-            boxShadow: '0 20px 44px rgba(0, 0, 0, 0.26)',
             minWidth: 250,
-            animation: 'slideUp 0.25s ease',
           }}
         >
           <div
+            className="hero-float-card__muted"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -362,16 +356,15 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
               fontSize: 11,
               fontWeight: 500,
               letterSpacing: '0.04em',
-              color: 'rgba(255, 255, 255, 0.78)',
             }}
           >
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
               <span
+                className="hero-float-card__dot"
                 style={{
                   width: 6,
                   height: 6,
                   borderRadius: '50%',
-                  background: '#ffffff',
                   display: 'inline-block',
                 }}
               />
@@ -392,21 +385,21 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
             {activeCallout.title}
           </div>
           <div
+            className="hero-float-card__footer"
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               gap: 12,
               paddingTop: 10,
-              borderTop: '1px solid rgba(255, 255, 255, 0.16)',
             }}
           >
             <strong
+              className="hero-float-card__price"
               style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontSize: 19,
                 fontWeight: 600,
-                color: '#ffffff',
                 fontVariantNumeric: 'tabular-nums',
               }}
             >
@@ -438,6 +431,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
 
       {/* Pre-Scroll Right-Side Editorial Social Proof Card (fades out as lookbook plays) */}
       <div
+        className="hero-float-card hero-float-card--reviews"
         style={{
           position: 'absolute',
           right: 'clamp(20px, 5vw, 64px)',
@@ -446,24 +440,18 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
           opacity: introOpacity,
           transform: `translateY(${progress * 24}px)`,
           pointerEvents: introOpacity > 0.1 ? 'auto' : 'none',
-          transition: 'opacity 0.08s linear',
-          background: 'rgba(24, 22, 20, 0.48)',
-          backdropFilter: 'blur(18px)',
-          WebkitBackdropFilter: 'blur(18px)',
-          border: '1px solid rgba(255, 255, 255, 0.24)',
-          borderRadius: 18,
+          transition: 'opacity 0.08s linear, background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
           padding: '14px 18px',
-          color: '#ffffff',
           minWidth: 235,
-          boxShadow: '0 18px 40px rgba(0, 0, 0, 0.22)',
+          cursor: 'default',
         }}
       >
         <div
+          className="hero-float-card__muted"
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: 11,
             fontWeight: 500,
-            color: 'rgba(255, 255, 255, 0.78)',
             letterSpacing: '0.03em',
             marginBottom: 4,
           }}
@@ -471,7 +459,9 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
           Campus Verified Reviews
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-          <span style={{ color: '#f5c946', fontSize: 14, letterSpacing: '0.08em' }}>★★★★★</span>
+          <span className="hero-float-card__stars" style={{ fontSize: 14, letterSpacing: '0.08em' }}>
+            ★★★★★
+          </span>
           <span
             style={{
               fontFamily: "'Playfair Display', Georgia, serif",
@@ -483,10 +473,10 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
           </span>
         </div>
         <div
+          className="hero-float-card__muted"
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: 12,
-            color: 'rgba(255, 255, 255, 0.82)',
           }}
         >
           528+ Student Reviews · 5 Lookbook Pieces

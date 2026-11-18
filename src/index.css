@@ -471,6 +471,98 @@ button {
   mix-blend-mode: screen;
 }
 
+@keyframes heroCardWiggle {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  20% {
+    transform: rotate(-2.5deg) scale(1.02);
+  }
+  45% {
+    transform: rotate(2.5deg) scale(1.02);
+  }
+  70% {
+    transform: rotate(-1.2deg) scale(1.01);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.hero-float-card {
+  background: rgba(24, 22, 20, 0.58);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.26);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-float-card--callout {
+  animation: slideUp 0.25s ease;
+}
+
+.hero-float-card--reviews {
+  background: rgba(24, 22, 20, 0.48);
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.hero-float-card:hover {
+  animation: heroCardWiggle 0.44s ease-in-out 1;
+  background: rgba(250, 248, 245, 0.96);
+  border-color: rgba(20, 19, 18, 0.14);
+  color: #141312;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+}
+
+.hero-float-card__muted {
+  color: rgba(255, 255, 255, 0.78);
+  transition: color 0.25s ease;
+}
+
+.hero-float-card:hover .hero-float-card__muted {
+  color: #57534e;
+}
+
+.hero-float-card__dot {
+  background: #ffffff;
+  transition: background 0.25s ease;
+}
+
+.hero-float-card:hover .hero-float-card__dot {
+  background: #141312;
+}
+
+.hero-float-card__footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  transition: border-color 0.25s ease;
+}
+
+.hero-float-card:hover .hero-float-card__footer {
+  border-top-color: rgba(20, 19, 18, 0.12);
+}
+
+.hero-float-card__price {
+  color: #ffffff;
+  transition: color 0.25s ease;
+}
+
+.hero-float-card:hover .hero-float-card__price {
+  color: #141312;
+}
+
+.hero-float-card__stars {
+  color: #f5c946;
+  transition: color 0.25s ease;
+}
+
+.hero-float-card:hover .hero-float-card__stars {
+  color: #d97706;
+}
+
 .shopcart-hero-grid {
   position: relative;
   z-index: 1;
@@ -741,16 +833,32 @@ button {
 
 /* Rounded Dark Green Elegance Craft Banner (Picture bottom right) */
 .elegance-banner {
-  background: linear-gradient(115deg, #0c2f26 0%, #174b3d 65%, #205c4b 100%);
+  position: relative;
+  margin-top: 64px;
   color: #ffffff;
-  border-radius: 28px;
-  padding: 36px 42px;
+  padding: 44px 42px 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 28px;
   flex-wrap: wrap;
+}
+
+.elegance-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, #0b2d23 0%, #134435 58%, #1e5946 100%);
+  border-radius: 28px;
+  transform: skewY(2.2deg);
+  transform-origin: top left;
   box-shadow: var(--shadow-float);
+  z-index: 0;
+}
+
+.elegance-banner > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Filter pills bar */

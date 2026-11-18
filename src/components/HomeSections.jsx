@@ -309,45 +309,141 @@ export default function HomeSections({
         </div>
       </section>
 
-      {/* 7. Elegance Craft Accent Bottom Banner (Catalog picture bottom right) */}
+      {/* 7. Elegance Craft Accent Bottom Banner */}
       <section className="elegance-banner">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 22, flexWrap: 'wrap' }}>
-          <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 20, padding: 8 }}>
-            <img
-              src="/images/podium/sneakers.jpg"
-              alt="Elegance Craft Accent Campus Drops"
-              style={{ width: 124, height: 100, objectFit: 'cover', borderRadius: 14, display: 'block' }}
-            />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 28, flexWrap: 'wrap' }}>
+          {/* Paint-Splatter High-Top Sneaker popping above the slanted top edge */}
+          <div style={{ marginTop: -118, flexShrink: 0, filter: 'drop-shadow(0 18px 24px rgba(0,0,0,0.35))' }}>
+            <svg
+              width="285"
+              height="242"
+              viewBox="0 0 260 220"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Paint-splatter high-top sneaker"
+            >
+              {/* Paint splatters & drips behind shoe */}
+              <ellipse cx="110" cy="184" rx="88" ry="12" fill="rgba(0,0,0,0.42)" />
+              <path d="M22 142 C10 120, 26 92, 46 82 L68 122 L38 164 Z" fill="#f97316" />
+              <path d="M52 54 L66 28 L76 62 Z" fill="#38bdf8" />
+              <path d="M128 74 L165 44 L148 84 Z" fill="#ec4899" />
+              <path d="M162 110 L218 96 L180 130 Z" fill="#22d3ee" />
+              <path d="M142 144 L212 154 L160 166 Z" fill="#f59e0b" />
+              <circle cx="48" cy="40" r="4" fill="#22d3ee" />
+              <circle cx="152" cy="48" r="3.5" fill="#facc15" />
+              <circle cx="192" cy="86" r="3" fill="#ec4899" />
+              <circle cx="206" cy="134" r="4" fill="#38bdf8" />
+              <rect x="64" y="182" width="4" height="22" rx="2" fill="#22d3ee" />
+              <rect x="78" y="184" width="3.5" height="28" rx="1.75" fill="#f97316" />
+              <rect x="114" y="184" width="3" height="19" rx="1.5" fill="#ec4899" />
+
+              {/* High-top upper silhouette */}
+              <path
+                d="M42 152 L54 46 C56 36, 72 34, 86 42 L114 58 L138 106 L208 134 C226 141, 232 158, 224 168 L42 168 Z"
+                fill="#ffffff"
+                stroke="#111827"
+                strokeWidth="4"
+                strokeLinejoin="round"
+              />
+              {/* Colorful paint-splatter panels */}
+              <path d="M52 72 L98 54 L106 88 L49 102 Z" fill="#38bdf8" />
+              <path d="M46 106 L94 94 L108 136 L43 148 Z" fill="#ec4899" />
+              <path d="M70 116 L114 104 L126 146 L76 154 Z" fill="#facc15" />
+              <path d="M108 82 L134 106 L160 124 L132 148 L104 128 Z" fill="#f97316" />
+              <path d="M138 118 L178 130 L166 152 L130 148 Z" fill="#a855f7" />
+              <path d="M56 44 L86 42 L102 64 L54 68 Z" fill="#22d3ee" />
+              <path d="M84 44 L112 58 L100 78 L80 62 Z" fill="#fb923c" />
+
+              {/* White perforated toe box */}
+              <path
+                d="M158 132 L210 138 C224 142, 228 156, 222 164 L148 164 Z"
+                fill="#f8fafc"
+                stroke="#111827"
+                strokeWidth="3.5"
+                strokeLinejoin="round"
+              />
+              <circle cx="178" cy="147" r="1.8" fill="#334155" />
+              <circle cx="188" cy="149" r="1.8" fill="#334155" />
+              <circle cx="198" cy="151" r="1.8" fill="#334155" />
+              <circle cx="183" cy="156" r="1.8" fill="#334155" />
+              <circle cx="194" cy="157" r="1.8" fill="#334155" />
+
+              {/* Eyelets & crisp white laces */}
+              <path d="M104 56 L156 132" stroke="#111827" strokeWidth="4" strokeLinecap="round" />
+              <path d="M110 64 L130 62" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" />
+              <path d="M110 64 L130 62" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M118 78 L139 76" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" />
+              <path d="M118 78 L139 76" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M127 92 L149 90" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" />
+              <path d="M127 92 L149 90" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M136 106 L159 104" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" />
+              <path d="M136 106 L159 104" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M146 120 L169 118" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" />
+              <path d="M146 120 L169 118" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" />
+              {/* Loose hanging white lace */}
+              <path
+                d="M108 62 C88 74, 86 112, 92 142"
+                stroke="#ffffff"
+                strokeWidth="5.5"
+                strokeLinecap="round"
+              />
+              <path
+                d="M108 62 C88 74, 86 112, 92 142"
+                stroke="#111827"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+
+              {/* Vulcanized midsole (orange heel to white toe) */}
+              <path
+                d="M36 154 L148 160 L226 164 C230 164, 230 178, 222 180 L146 178 L36 170 C30 170, 30 154, 36 154 Z"
+                fill="#f8fafc"
+                stroke="#111827"
+                strokeWidth="3.5"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M36 154 L138 160 L138 177 L36 170 C30 170, 30 154, 36 154 Z"
+                fill="#f59e0b"
+                stroke="#111827"
+                strokeWidth="3"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
+
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#fde047', marginBottom: 6 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#fde047', marginBottom: 6, letterSpacing: '0.04em' }}>
               FEATURED STUDENT CRAFT
             </div>
-            <h2 style={{ margin: '0 0 8px', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}>
+            <h2 style={{ margin: '0 0 10px', fontSize: 'clamp(1.6rem, 3vw, 2.35rem)', lineHeight: 1.12 }}>
               Elegance Craft Accent <span style={{ color: '#f58220' }}>Campus Drops</span>
             </h2>
-            <p style={{ margin: 0, fontSize: 14, opacity: 0.85, maxWidth: 440 }}>
+            <p style={{ margin: '0 0 18px', fontSize: 14, opacity: 0.88, maxWidth: 440, lineHeight: 1.55 }}>
               Support verified student creators across Engineering, Business, and Arts &amp; Design. Zero listing fees, 100% campus-verified.
             </p>
+            <button type="button" className="btn-orange" onClick={() => onBrowseCategory('Fashion')}>
+              Start Shopping <ArrowRight size={16} />
+            </button>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
           <span
             style={{
               background: '#ffffff',
               color: '#0e3329',
               fontWeight: 800,
-              fontSize: 14,
-              padding: '8px 14px',
-              borderRadius: 999,
+              fontSize: 15,
+              padding: '10px 18px',
+              borderRadius: 10,
+              transform: 'rotate(-8deg)',
+              boxShadow: '0 10px 24px rgba(0, 0, 0, 0.24)',
+              display: 'inline-block',
             }}
           >
             From $8.50
           </span>
-          <button type="button" className="btn-orange" onClick={() => onBrowseCategory('All')}>
-            Start Shopping <ArrowRight size={16} />
-          </button>
         </div>
       </section>
     </div>
