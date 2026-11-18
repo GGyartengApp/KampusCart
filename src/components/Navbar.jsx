@@ -6,15 +6,13 @@ import {
   User,
   ChevronDown,
   Bell,
-  MapPin,
-  Phone,
   ShieldCheck,
   Store,
   LayoutDashboard,
   Menu,
   X,
 } from 'lucide-react';
-import { CATEGORIES, HALLS } from '../data/mockData';
+import { CATEGORIES } from '../data/mockData';
 import ProductIllustration from './ProductIllustration';
 
 export default function Navbar({
@@ -66,84 +64,6 @@ export default function Navbar({
 
   return (
     <>
-      {/* Shopcart-style Top Announcement Bar */}
-      <div className="top-bar">
-        <div className="container top-bar-inner">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-              <Phone size={12} /> Campus Support: +233-55-019-CAMPUS
-            </span>
-          </div>
-
-          <div className="top-bar-center">
-            <span>Get 25% Off with code CAMPUS25</span>
-            <span>|</span>
-            <button
-              type="button"
-              className="top-bar-link"
-              onClick={() => setActivePage('marketplace')}
-            >
-              Shop Now
-            </button>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-              <MapPin size={12} />
-              <select
-                aria-label="Campus Hall"
-                value={selectedHall}
-                onChange={(e) => setSelectedHall(e.target.value)}
-                style={{
-                  background: 'transparent',
-                  color: '#fff',
-                  border: 'none',
-                  fontSize: 12,
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  outline: 'none',
-                }}
-              >
-                {HALLS.map((h) => (
-                  <option key={h} value={h} style={{ color: '#18181b' }}>
-                    {h}
-                  </option>
-                ))}
-              </select>
-            </span>
-
-            {/* Quick Role Switcher for Demoing Buyer / Seller / Admin */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'rgba(255,255,255,0.14)', padding: '2px 6px', borderRadius: 999 }}>
-              <span style={{ fontSize: 10, opacity: 0.85 }}>View:</span>
-              {['buyer', 'seller', 'admin'].map((r) => (
-                <button
-                  key={r}
-                  type="button"
-                  onClick={() => {
-                    setRole(r);
-                    if (r === 'seller') setActivePage('seller');
-                    else if (r === 'admin') setActivePage('admin');
-                    else setActivePage('home');
-                  }}
-                  style={{
-                    border: 'none',
-                    borderRadius: 999,
-                    padding: '2px 8px',
-                    fontSize: 11,
-                    fontWeight: 700,
-                    textTransform: 'capitalize',
-                    background: role === r ? '#facc15' : 'transparent',
-                    color: role === r ? '#0e3329' : '#ffffff',
-                  }}
-                >
-                  {r}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Sticky Header */}
       <header className="main-header">
         <div className="container header-inner">

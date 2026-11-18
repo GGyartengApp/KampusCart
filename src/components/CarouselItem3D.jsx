@@ -169,21 +169,18 @@ export default function CarouselItem3D({ modelType, color, offset, dragProgress,
   const groupRef = useRef();
 
   const isActive = offset === 0;
-  const isVisible = Math.abs(offset) <= 2;
+  // Strictly 1 Tech item per view (neighbors only animate in/out off-stage during transitions)
+  const isVisible = isActive;
 
-  const centerX = isMobile ? 0 : -1.35;
-  let targetX = isActive ? centerX + dragProgress * 1.15 : 0;
-  const targetZ = isActive ? 0.45 : -0.35 - Math.abs(offset) * 0.25;
-  const targetScale = isActive ? (isMobile ? 1.15 : 1.1) : 0.78;
-  let targetRotY = 0;
-
-  if (offset < 0) {
-    targetX = centerX - 0.95 + (offset + 1) * 0.5;
-    targetRotY = 0.45;
-  } else if (offset > 0) {
-    targetX = centerX + 0.97 + (offset - 1) * 0.5;
-    targetRotY = -0.45;
-  }
+  const centerX = isMobile ? 0 : -1.25;
+  const targetX = isActive
+    ? centerX + dragProgress * 1.25
+    : offset < 0
+    ? centerX - 3.2
+    : centerX + 3.2;
+  const targetZ = isActive ? 0.45 : -0.5;
+  const targetScale = isActive ? (isMobile ? 1.22 : 1.18) : 0.01;
+  const targetRotY = offset < 0 ? 0.5 : -0.5;
 
   useFrame((state, delta) => {
     const g = groupRef.current;
