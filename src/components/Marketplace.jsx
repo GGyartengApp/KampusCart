@@ -124,24 +124,113 @@ export default function Marketplace({
           onSelectProduct={onSelectProduct}
         />
       ) : (
-        <div className="cream-promo-banner" style={{ marginBottom: 28, padding: '24px 32px' }}>
-          <div>
-            <h1 style={{ margin: '0 0 6px', fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', color: '#0b462d' }}>
+        <div
+          style={{
+            position: 'relative',
+            overflow: 'hidden',
+            marginBottom: 28,
+            padding: '26px 30px',
+            borderRadius: 22,
+            border: '3px solid #111827',
+            background: '#facc15',
+            boxShadow: '0 14px 32px rgba(15, 23, 42, 0.14)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 24,
+            flexWrap: 'wrap',
+          }}
+        >
+          {/* Comic-Style Explosion Graffiti Background */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 1200 260"
+            preserveAspectRatio="xMidYMid slice"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              pointerEvents: 'none',
+            }}
+          >
+            <defs>
+              <pattern id="comicHalftone" width="16" height="16" patternUnits="userSpaceOnUse">
+                <circle cx="4" cy="4" r="2.2" fill="rgba(17,24,39,0.14)" />
+              </pattern>
+            </defs>
+            <rect width="1200" height="260" fill="#fde047" />
+            <rect width="1200" height="260" fill="url(#comicHalftone)" />
+
+            {/* Comic starburst explosion rays */}
+            <polygon points="600,130 0,0 180,0" fill="#fb923c" />
+            <polygon points="600,130 320,0 470,0" fill="#ec4899" />
+            <polygon points="600,130 640,0 810,0" fill="#22d3ee" />
+            <polygon points="600,130 960,0 1160,0" fill="#a3e635" />
+            <polygon points="600,130 1200,50 1200,185" fill="#f97316" />
+            <polygon points="600,130 1080,260 880,260" fill="#ec4899" />
+            <polygon points="600,130 690,260 510,260" fill="#38bdf8" />
+            <polygon points="600,130 310,260 110,260" fill="#a3e635" />
+            <polygon points="600,130 0,210 0,90" fill="#22d3ee" />
+
+            {/* Jagged comic boom burst */}
+            <polygon
+              points="180,32 235,62 295,22 330,72 410,48 415,96 485,105 435,152 480,205 405,212 370,252 305,218 245,254 205,205 130,224 148,164 85,132 142,92"
+              fill="#f97316"
+              stroke="#111827"
+              strokeWidth="5"
+              strokeLinejoin="round"
+            />
+            <polygon
+              points="760,26 820,58 885,18 920,66 1005,40 1010,94 1085,112 1030,156 1072,212 990,216 955,252 888,216 825,248 790,198 720,208 745,154 685,120 742,84"
+              fill="#ec4899"
+              stroke="#111827"
+              strokeWidth="5"
+              strokeLinejoin="round"
+            />
+
+            {/* Graffiti paint drips & pop-art stars */}
+            <circle cx="95" cy="54" r="16" fill="#22d3ee" stroke="#111827" strokeWidth="4" />
+            <circle cx="565" cy="48" r="14" fill="#a3e635" stroke="#111827" strokeWidth="4" />
+            <circle cx="640" cy="216" r="18" fill="#facc15" stroke="#111827" strokeWidth="4" />
+            <circle cx="1135" cy="64" r="15" fill="#38bdf8" stroke="#111827" strokeWidth="4" />
+            <path d="M510 18 L525 52 L560 54 L532 76 L542 110 L510 90 L478 110 L488 76 L460 54 L495 52 Z" fill="#fde047" stroke="#111827" strokeWidth="4" strokeLinejoin="round" />
+          </svg>
+
+          {/* High-contrast comic text box inside the explosion */}
+          <div
+            style={{
+              position: 'relative',
+              zIndex: 1,
+              background: 'rgba(255, 255, 255, 0.95)',
+              border: '2.5px solid #111827',
+              borderRadius: 16,
+              padding: '16px 22px',
+              boxShadow: '5px 5px 0 #111827',
+              maxWidth: 640,
+            }}
+          >
+            <h1 style={{ margin: '0 0 6px', fontSize: 'clamp(1.35rem, 2.7vw, 1.95rem)', color: '#111827', fontWeight: 800 }}>
               Grab Upto 50% Off On Campus Essentials
             </h1>
-            <p style={{ margin: 0, fontSize: 13, color: '#475569' }}>
+            <p style={{ margin: 0, fontSize: 13, color: '#334155', fontWeight: 500 }}>
               Filter by your Hall, Faculty, Price, Rating, or Delivery Option. Verified student sellers only.
             </p>
           </div>
+
           <img
             src="/images/podium/campus-tech.jpg"
             alt="Campus Essentials"
             style={{
-              width: 140,
-              height: 96,
+              position: 'relative',
+              zIndex: 1,
+              width: 148,
+              height: 102,
               objectFit: 'cover',
               borderRadius: 14,
-              boxShadow: '0 10px 24px rgba(15, 23, 42, 0.12)',
+              border: '2.5px solid #111827',
+              boxShadow: '5px 5px 0 #111827',
+              transform: 'rotate(2deg)',
               display: 'block',
             }}
           />
