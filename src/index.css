@@ -1159,6 +1159,51 @@ button {
   .shopcart-hero {
     padding: 28px 0;
   }
+  .lookbook-hero {
+    height: calc(100dvh - 64px) !important;
+    min-height: 520px;
+  }
+  .lookbook-hero--locked {
+    touch-action: none;
+  }
+  .lookbook-video {
+    object-position: center 14% !important;
+  }
+  .lookbook-intro {
+    justify-content: flex-start !important;
+    padding-top: 28px;
+    padding-bottom: 130px;
+  }
+  .lookbook-reviews {
+    left: 16px !important;
+    right: 16px !important;
+    bottom: 66px !important;
+    min-width: 0 !important;
+    padding: 11px 14px !important;
+  }
+  .lookbook-scroll-prompt {
+    bottom: 16px !important;
+    white-space: nowrap;
+  }
+  .lookbook-callout {
+    left: 16px !important;
+    right: 16px !important;
+    top: auto !important;
+    bottom: 18px !important;
+    min-width: 0 !important;
+  }
+  .lookbook-finale {
+    left: 16px !important;
+    right: 16px !important;
+    top: auto !important;
+    bottom: 16px !important;
+    max-width: none !important;
+    padding: 18px 20px !important;
+    transform: translateY(24px) !important;
+  }
+  .lookbook-finale--visible {
+    transform: translateY(0) !important;
+  }
   .podium-stage {
     gap: 8px;
     min-height: 190px;

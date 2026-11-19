@@ -56,6 +56,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
   const progressRef = useRef(0);
   const targetTimeRef = useRef(CLIP_START);
   const touchYRef = useRef(null);
+  const videoPrimedRef = useRef(false);
 
   const [progress, setProgress] = useState(0);
   const [unlocked, setUnlocked] = useState(false);
@@ -97,6 +98,19 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
     const onTouchStart = (e) => {
       if (unlocked || window.scrollY > 4) return;
       touchYRef.current = e.touches[0]?.clientY ?? null;
+
+      // Mobile Safari / Chrome require a gesture-triggered play/pause to unlock frame seeking
+      const vid = videoRef.current;
+      if (vid && !videoPrimedRef.current) {
+        videoPrimedRef.current = true;
+        const p = vid.play();
+        if (p && typeof p.then === 'function') {
+          p.then(() => {
+            vid.pause();
+            setVideoReady(true);
+          }).catch(() => {});
+        }
+      }
     };
 
     const onTouchMove = (e) => {
@@ -106,7 +120,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
       touchYRef.current = currentY;
       if (deltaY > 0 || progressRef.current > 0) {
         e.preventDefault();
-        advanceByDelta(deltaY * 1.6);
+        advanceByDelta(deltaY * 1.9);
       }
     };
 
@@ -142,6 +156,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
 
   return (
     <section
+      className={`lookbook-hero${unlocked ? '' : ' lookbook-hero--locked'}`}
       style={{
         position: 'relative',
         width: '100%',
@@ -153,6 +168,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
       {/* Scroll-scrubbed Studio Video (0s -> end) */}
       <video
         ref={videoRef}
+        className="lookbook-video"
         src="/videos/hero-lookbook.mp4"
         muted
         playsInline
@@ -188,7 +204,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
 
       {/* DESIGN & HIGH QUALITY Title Overlay */}
       <div
-        className="container"
+        className="container lookbook-intro"
         style={{
           position: 'relative',
           zIndex: 3,
@@ -306,6 +322,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
 
         {/* Scroll Prompt */}
         <div
+          className="lookbook-scroll-prompt"
           style={{
             position: 'absolute',
             bottom: 26,
@@ -336,7 +353,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
       {activeCallout && (
         <div
           key={activeCallout.id}
-          className="hero-float-card hero-float-card--callout"
+          className="hero-float-card hero-float-card--callout lookbook-callout"
           style={{
             position: 'absolute',
             zIndex: 5,
@@ -431,7 +448,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
 
       {/* Pre-Scroll Right-Side Editorial Social Proof Card (fades out as lookbook plays) */}
       <div
-        className="hero-float-card hero-float-card--reviews"
+        className="hero-float-card hero-float-card--reviews lookbook-reviews"
         style={{
           position: 'absolute',
           right: 'clamp(20px, 5vw, 64px)',
@@ -484,6 +501,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
       </div>
       {/* Post-Video Animated Right-Side Editorial Text Section */}
       <div
+        className={`lookbook-finale${showFinale ? ' lookbook-finale--visible' : ''}`}
         style={{
           position: 'absolute',
           right: 'clamp(24px, 6vw, 72px)',
