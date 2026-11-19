@@ -125,6 +125,7 @@ export default function Marketplace({
         />
       ) : (
         <div
+          className="graffiti-banner"
           style={{
             position: 'relative',
             overflow: 'hidden',
@@ -141,8 +142,9 @@ export default function Marketplace({
             flexWrap: 'wrap',
           }}
         >
-          {/* Comic-Style Explosion Graffiti Background */}
+          {/* Desktop Comic-Style Explosion Graffiti Background */}
           <svg
+            className="graffiti-bg-desktop"
             aria-hidden="true"
             viewBox="0 0 1200 260"
             preserveAspectRatio="xMidYMid slice"
@@ -197,8 +199,78 @@ export default function Marketplace({
             <path d="M510 18 L525 52 L560 54 L532 76 L542 110 L510 90 L478 110 L488 76 L460 54 L495 52 Z" fill="#fde047" stroke="#111827" strokeWidth="4" strokeLinejoin="round" />
           </svg>
 
+          {/* Mobile Transparent Floating Colorful Graffiti Explosion */}
+          <svg
+            className="graffiti-bg-mobile"
+            aria-hidden="true"
+            viewBox="0 0 420 260"
+            preserveAspectRatio="none"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              pointerEvents: 'none',
+            }}
+          >
+            <defs>
+              <pattern id="mobileGraffitiDots" width="10" height="10" patternUnits="userSpaceOnUse">
+                <circle cx="5" cy="5" r="2.6" fill="#ec4899" opacity="0.45" />
+              </pattern>
+              <radialGradient id="mobileDotsMaskGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="55%" stopColor="#ffffff" stopOpacity="1" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+              </radialGradient>
+              <mask id="mobileDotsMask">
+                <ellipse cx="210" cy="130" rx="205" ry="122" fill="url(#mobileDotsMaskGrad)" />
+              </mask>
+            </defs>
+
+            {/* Halftone pop-art aura on transparent background */}
+            <rect width="420" height="260" fill="url(#mobileGraffitiDots)" mask="url(#mobileDotsMask)" />
+
+            {/* Outer graffiti cyan & purple explosion spikes */}
+            <polygon
+              points="210,10 238,52 288,16 292,62 356,34 336,80 408,74 358,116 414,142 356,162 396,208 332,198 346,248 286,214 268,254 228,216 196,256 178,212 126,248 136,198 64,224 98,172 18,176 74,138 10,102 82,94 42,46 116,66 110,16 168,54"
+              fill="#06b6d4"
+              stroke="#111827"
+              strokeWidth="4.5"
+              strokeLinejoin="round"
+            />
+            {/* Hot pink / magenta layer */}
+            <polygon
+              points="210,24 235,62 278,30 282,72 338,48 320,88 386,84 342,120 392,142 340,158 374,198 318,188 328,232 276,202 260,236 226,204 198,238 182,200 136,230 144,188 82,210 112,164 42,166 90,134 34,104 96,98 62,56 126,74 122,28 172,62"
+              fill="#ec4899"
+              stroke="#111827"
+              strokeWidth="3.5"
+              strokeLinejoin="round"
+            />
+            {/* Vibrant orange layer */}
+            <polygon
+              points="210,40 232,74 268,46 272,82 320,62 304,96 362,94 324,124 368,142 322,156 352,188 302,180 310,216 266,192 252,220 222,192 198,222 184,188 144,214 152,178 98,196 124,158 64,158 106,132 58,106 110,100 82,66 136,80 132,42 176,72"
+              fill="#f97316"
+            />
+            {/* Electric lime & yellow starburst */}
+            <polygon
+              points="210,56 228,84 258,62 262,92 302,76 288,104 338,102 306,126 342,140 304,152 328,178 286,172 292,200 256,180 244,204 218,182 198,204 186,178 152,198 158,168 114,182 136,150 86,150 120,130 82,108 124,104 100,76 144,88 142,56 180,82"
+              fill="#fde047"
+            />
+            {/* Crisp white inner burst where text sits */}
+            <polygon
+              points="210,72 224,94 248,76 252,100 286,88 274,110 316,108 290,128 320,138 288,148 308,170 272,164 278,186 246,170 236,190 214,172 198,190 188,168 160,184 164,160 128,170 146,144 104,144 134,128 102,110 136,106 116,84 152,94 150,70 182,90"
+              fill="#ffffff"
+            />
+
+            {/* Floating graffiti shards */}
+            <polygon points="32,30 48,40 36,48" fill="#a3e635" stroke="#111827" strokeWidth="2" />
+            <polygon points="384,34 398,22 394,44" fill="#fde047" stroke="#111827" strokeWidth="2" />
+            <polygon points="38,226 54,218 48,236" fill="#ec4899" stroke="#111827" strokeWidth="2" />
+            <polygon points="376,228 394,234 380,244" fill="#22d3ee" stroke="#111827" strokeWidth="2" />
+          </svg>
+
           {/* High-contrast comic text box inside the explosion */}
           <div
+            className="graffiti-text-box"
             style={{
               position: 'relative',
               zIndex: 1,
@@ -210,7 +282,7 @@ export default function Marketplace({
               maxWidth: 640,
             }}
           >
-            <h1 style={{ margin: '0 0 6px', fontSize: 'clamp(1.35rem, 2.7vw, 1.95rem)', color: '#111827', fontWeight: 800 }}>
+            <h1 style={{ margin: '0 0 6px', fontSize: 'clamp(1.25rem, 2.7vw, 1.95rem)', color: '#111827', fontWeight: 800 }}>
               Grab Upto 50% Off On Campus Essentials
             </h1>
             <p style={{ margin: 0, fontSize: 13, color: '#334155', fontWeight: 500 }}>

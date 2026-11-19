@@ -1147,7 +1147,42 @@ button {
   border-color: rgba(20, 19, 18, 0.14);
 }
 
+.graffiti-bg-mobile {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .graffiti-banner {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 46px 28px !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
+  .graffiti-bg-desktop {
+    display: none;
+  }
+  .graffiti-bg-mobile {
+    display: block;
+  }
+  .graffiti-text-box {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 8px 18px !important;
+    text-align: center;
+    max-width: 260px !important;
+  }
+  .graffiti-text-box h1 {
+    font-size: 1.08rem !important;
+    line-height: 1.2;
+  }
+  .graffiti-text-box p {
+    font-size: 11px !important;
+    line-height: 1.35;
+  }
   .container {
     padding: 0 14px;
   }
