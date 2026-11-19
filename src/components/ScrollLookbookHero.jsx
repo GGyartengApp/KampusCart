@@ -70,7 +70,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
     const vid = videoRef.current;
     if (isMobile && vid) {
       vid.muted = true;
-      vid.loop = true;
+      vid.loop = false;
       vid.play().catch(() => { });
     }
 
@@ -105,12 +105,11 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
     };
 
     const onTouchStart = () => {
-      if (!isMobile) return;
+      if (!isMobile || progressRef.current >= 0.995) return;
       // Fallback for mobile browsers (e.g. iOS Low Power Mode) that pause initial autoplay
       const v = videoRef.current;
-      if (v && v.paused) {
+      if (v && v.paused && !v.ended) {
         v.muted = true;
-        v.loop = true;
         v.play().catch(() => { });
       }
     };
@@ -126,11 +125,11 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
           progressRef.current = next;
           setProgress(next);
         }
-        if (!isMobile && next >= 0.995) {
+        if (next >= 0.995) {
           v.pause();
           progressRef.current = 1;
           setProgress(1);
-          setUnlocked(true);
+          if (!isMobile) setUnlocked(true);
         }
       }
       rafId = requestAnimationFrame(tick);
@@ -183,13 +182,12 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
         background: '#181614',
       }}
     >
-      {/* Studio Video (auto-plays & loops on mobile; scroll-driven on desktop) */}
+      {/* Studio Video (auto-plays once on mobile; scroll-driven on desktop) */}
       <video
         ref={videoRef}
         className="lookbook-video"
         src="/videos/hero-lookbook.mp4#t=0.001"
         autoPlay={isMobile}
-        loop={isMobile}
         muted
         playsInline
         preload="auto"
