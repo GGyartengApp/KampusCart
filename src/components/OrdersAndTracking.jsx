@@ -76,7 +76,7 @@ export default function OrdersAndTracking({
                     >
                       {order.status}
                     </span>
-                    <strong style={{ fontSize: 16, color: '#0b462d' }}>${order.total.toFixed(2)}</strong>
+                    <strong style={{ fontSize: 16, color: '#0b462d' }}>GH₵{order.total.toFixed(2)}</strong>
                   </div>
                 </div>
 
@@ -117,7 +117,7 @@ export default function OrdersAndTracking({
                           </div>
                         </div>
                       </div>
-                      <strong>${(item.price * item.qty).toFixed(2)}</strong>
+                      <strong>GH₵{(item.price * item.qty).toFixed(2)}</strong>
                     </div>
                   ))}
                 </div>

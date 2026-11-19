@@ -186,7 +186,7 @@ export default function SellerDashboard({
                 <DollarSign size={16} color="#0b462d" />
               </div>
               <div style={{ fontSize: 24, fontWeight: 800, marginTop: 6, color: '#0b462d' }}>
-                ${completedRevenue.toFixed(2)}
+                GH₵{completedRevenue.toFixed(2)}
               </div>
               <div style={{ fontSize: 11, color: '#64748b', marginTop: 4 }}>After 5% platform fee</div>
             </div>
@@ -271,7 +271,7 @@ export default function SellerDashboard({
                           {order.buyerName} ({order.buyerHall})
                           <div style={{ fontSize: 11, color: '#64748b' }}>{order.meetupPoint}</div>
                         </td>
-                        <td><strong>${order.total.toFixed(2)}</strong></td>
+                        <td><strong>GH₵{order.total.toFixed(2)}</strong></td>
                         <td>
                           <span style={{ fontWeight: 700, color: order.status === 'Completed' ? '#16a34a' : '#d97706' }}>
                             {order.status}
@@ -346,7 +346,7 @@ export default function SellerDashboard({
                 type="number"
                 step="0.01"
                 min="1"
-                placeholder="Price ($)*"
+                placeholder="Price (GH₵)*"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 style={{ padding: '10px 12px', borderRadius: 8, border: '1px solid #cbd5e1', fontSize: 13 }}
@@ -435,7 +435,7 @@ export default function SellerDashboard({
                       <strong>{p.title}</strong>
                       <div style={{ fontSize: 11, color: '#64748b' }}>{p.category}</div>
                     </td>
-                    <td>${p.price.toFixed(2)}</td>
+                    <td>GH₵{p.price.toFixed(2)}</td>
                     <td>{p.stock}</td>
                     <td>
                       <span style={{ fontSize: 11, fontWeight: 700, color: p.status === 'approved' ? '#16a34a' : '#d97706' }}>
@@ -549,15 +549,15 @@ export default function SellerDashboard({
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 13 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>Gross Completed Sales</span>
-                <strong>${(completedRevenue / 0.95).toFixed(2)}</strong>
+                <strong>GH₵{(completedRevenue / 0.95).toFixed(2)}</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>KampusCart Commission (5%)</span>
-                <strong style={{ color: '#dc2626' }}>−${((completedRevenue / 0.95) * 0.05).toFixed(2)}</strong>
+                <strong style={{ color: '#dc2626' }}>−GH₵{((completedRevenue / 0.95) * 0.05).toFixed(2)}</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #e2e8f0', paddingTop: 8, fontSize: 15 }}>
                 <strong>Net Payout</strong>
-                <strong style={{ color: '#0b462d' }}>${completedRevenue.toFixed(2)}</strong>
+                <strong style={{ color: '#0b462d' }}>GH₵{completedRevenue.toFixed(2)}</strong>
               </div>
             </div>
           </div>

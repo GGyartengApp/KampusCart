@@ -177,7 +177,7 @@ export default function FoodCarouselHero({ foodProducts, sellers, onAddToCart, o
                   </span>
                 )}
                 <strong style={{ fontSize: 15, textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
-                  ${slide.product.price.toFixed(2)}
+                  GH₵{slide.product.price.toFixed(2)}
                 </strong>
               </div>
 

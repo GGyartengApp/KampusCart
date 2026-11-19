@@ -59,7 +59,7 @@ export default function CartDrawer({ isOpen, items, onClose, onUpdateQty, onRemo
                     </div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <strong style={{ fontSize: 14 }}>${(item.price * item.qty).toFixed(2)}</strong>
+                    <strong style={{ fontSize: 14 }}>GH₵{(item.price * item.qty).toFixed(2)}</strong>
                     <div>
                       <button
                         type="button"
@@ -81,7 +81,7 @@ export default function CartDrawer({ isOpen, items, onClose, onUpdateQty, onRemo
           <div style={{ padding: 20, borderTop: '1px solid #e2e8f0', background: '#f8fafc' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 14, fontSize: 15 }}>
               <span>Subtotal</span>
-              <strong style={{ color: '#0b462d' }}>${subtotal.toFixed(2)}</strong>
+              <strong style={{ color: '#0b462d' }}>GH₵{subtotal.toFixed(2)}</strong>
             </div>
             <button type="button" className="btn-primary" style={{ width: '100%' }} onClick={onCheckout}>
               Proceed to Checkout

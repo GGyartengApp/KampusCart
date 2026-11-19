@@ -442,7 +442,7 @@ export default function HomeSections({
               display: 'inline-block',
             }}
           >
-            From $8.50
+            From GH₵8.50
           </span>
         </div>
       </section>

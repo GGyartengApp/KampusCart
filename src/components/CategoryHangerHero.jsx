@@ -483,10 +483,10 @@ export default function CategoryHangerHero({
             </p>
 
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 18 }}>
-              <strong style={{ fontSize: 26, color: activeDesign.pillColor }}>${activeItem.price.toFixed(2)}</strong>
+              <strong style={{ fontSize: 26, color: activeDesign.pillColor }}>GH₵{activeItem.price.toFixed(2)}</strong>
               {activeItem.originalPrice > activeItem.price && (
                 <span style={{ textDecoration: 'line-through', opacity: 0.65, fontSize: 14 }}>
-                  ${activeItem.originalPrice.toFixed(2)}
+                  GH₵{activeItem.originalPrice.toFixed(2)}
                 </span>
               )}
               <span style={{ fontSize: 12, opacity: 0.85 }}>({activeItem.stock} in stock)</span>

@@ -229,7 +229,7 @@ export default function Navbar({
                         </div>
                       </div>
                     </div>
-                    <strong style={{ fontSize: 13, color: '#0b462d' }}>${item.price.toFixed(2)}</strong>
+                    <strong style={{ fontSize: 13, color: '#0b462d' }}>GH₵{item.price.toFixed(2)}</strong>
                   </button>
                 ))}
               </div>

@@ -128,10 +128,10 @@ export default function ProductDetailModal({
             </div>
 
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, padding: '12px 0', borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', marginBottom: 14 }}>
-              <strong style={{ fontSize: 24, color: '#0b462d' }}>${product.price.toFixed(2)}</strong>
+              <strong style={{ fontSize: 24, color: '#0b462d' }}>GH₵{product.price.toFixed(2)}</strong>
               {product.originalPrice > product.price && (
                 <span style={{ textDecoration: 'line-through', color: '#94a3b8', fontSize: 14 }}>
-                  ${product.originalPrice.toFixed(2)}
+                  GH₵{product.originalPrice.toFixed(2)}
                 </span>
               )}
               <span style={{ fontSize: 12, color: '#16a34a', fontWeight: 600 }}>

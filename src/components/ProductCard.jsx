@@ -74,7 +74,7 @@ export default function ProductCard({
           {product.title}
         </h3>
         <strong style={{ fontSize: 15, color: '#0b462d', whiteSpace: 'nowrap' }}>
-          ${product.price.toFixed(2)}
+          GH₵{product.price.toFixed(2)}
         </strong>
       </div>
 

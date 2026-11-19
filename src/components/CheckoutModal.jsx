@@ -157,7 +157,7 @@ export default function CheckoutModal({
                       </div>
                     </div>
                   </div>
-                  <strong>${(item.price * item.qty).toFixed(2)}</strong>
+                  <strong>GH₵{(item.price * item.qty).toFixed(2)}</strong>
                 </div>
               ))}
             </div>
@@ -283,7 +283,7 @@ export default function CheckoutModal({
             <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 12, display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: '#64748b' }}>Sub Total</span>
-                <strong>${subtotal.toFixed(2)}</strong>
+                <strong>GH₵{subtotal.toFixed(2)}</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: '#64748b' }}>Buyer Escrow Protection</span>
@@ -291,16 +291,16 @@ export default function CheckoutModal({
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: '#64748b' }}>Coupon Discount</span>
-                <strong style={{ color: '#16a34a' }}>−${discount.toFixed(2)}</strong>
+                <strong style={{ color: '#16a34a' }}>−GH₵{discount.toFixed(2)}</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 16, borderTop: '1px solid #e2e8f0', paddingTop: 10 }}>
                 <strong>Total</strong>
-                <strong style={{ color: '#0b462d' }}>${total.toFixed(2)}</strong>
+                <strong style={{ color: '#0b462d' }}>GH₵{total.toFixed(2)}</strong>
               </div>
             </div>
 
             <button type="submit" className="btn-primary" style={{ width: '100%' }}>
-              Pay ${total.toFixed(2)}
+              Pay GH₵{total.toFixed(2)}
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: '#64748b', justifyContent: 'center' }}>

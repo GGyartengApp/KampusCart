@@ -363,9 +363,9 @@ export default function Marketplace({
           }}
         >
           <option value="All">Price: Any</option>
-          <option value="under20">Under $20</option>
-          <option value="20to100">$20 – $100</option>
-          <option value="over100">Over $100</option>
+          <option value="under20">Under GH₵20</option>
+          <option value="20to100">GH₵20 – GH₵100</option>
+          <option value="over100">Over GH₵100</option>
         </select>
 
         <select

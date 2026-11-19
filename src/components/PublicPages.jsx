@@ -49,7 +49,7 @@ export default function PublicPages({ onNotify }) {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
           <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 14, padding: 18 }}>
-            <div style={{ fontSize: 28, fontWeight: 800, color: '#fde047' }}>$0</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#fde047' }}>GH₵0</div>
             <div style={{ fontWeight: 700, marginTop: 4 }}>Storefront &amp; Listing Fee</div>
             <div style={{ fontSize: 12, opacity: 0.8, marginTop: 4 }}>Free to list unlimited products and services.</div>
           </div>

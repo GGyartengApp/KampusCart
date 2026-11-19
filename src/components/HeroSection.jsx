@@ -50,7 +50,7 @@ export default function HeroSection({ onBrowse, onStartSelling }) {
                 className: 'podium-block podium-1',
                 image: '/images/food/bowl1.jpg',
                 title: 'Hot Meals',
-                subtitle: 'From $8.50',
+                subtitle: 'From GH₵8.50',
                 titleSize: 13,
               },
               {

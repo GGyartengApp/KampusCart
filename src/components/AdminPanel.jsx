@@ -57,7 +57,7 @@ export default function AdminPanel({
             <TrendingUp size={16} color="#16a34a" />
           </div>
           <div style={{ fontSize: 24, fontWeight: 800, marginTop: 6, color: '#0b462d' }}>
-            ${totalCommissions.toFixed(2)}
+            GH₵{totalCommissions.toFixed(2)}
           </div>
           <div style={{ fontSize: 11, color: '#64748b', marginTop: 4 }}>{completedOrders.length} completed orders</div>
         </div>
@@ -185,7 +185,7 @@ export default function AdminPanel({
                     <tr key={p.id}>
                       <td><strong>{p.title}</strong></td>
                       <td>{p.category}</td>
-                      <td>${p.price.toFixed(2)}</td>
+                      <td>GH₵{p.price.toFixed(2)}</td>
                       <td>
                         <span style={{ fontWeight: 700, color: p.status === 'approved' ? '#16a34a' : '#d97706' }}>
                           {p.status}
@@ -308,8 +308,8 @@ export default function AdminPanel({
                   <td><strong>#{o.id}</strong></td>
                   <td>{o.buyerName} ({o.buyerHall})</td>
                   <td>{o.paymentMethod}</td>
-                  <td>${o.total.toFixed(2)}</td>
-                  <td>${(o.commissionFee || o.total * 0.05).toFixed(2)}</td>
+                  <td>GH₵{o.total.toFixed(2)}</td>
+                  <td>GH₵{(o.commissionFee || o.total * 0.05).toFixed(2)}</td>
                   <td><strong>{o.status}</strong></td>
                 </tr>
               ))}
