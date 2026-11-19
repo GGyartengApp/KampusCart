@@ -123,12 +123,23 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
       }
     };
 
-    const tick = () => {
+    let lastMobileSeek = 0;
+    const isTouchDevice =
+      typeof window !== 'undefined' &&
+      (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768);
+
+    const tick = (now = 0) => {
       if (!active) return;
       const vid = videoRef.current;
       if (vid && vid.readyState >= 1) {
         const diff = targetTimeRef.current - vid.currentTime;
-        if (Math.abs(diff) > 0.012) {
+        if (isTouchDevice) {
+          // Avoid cancelling in-flight mobile hardware decodes; seek only when idle (~30fps)
+          if (!vid.seeking && Math.abs(diff) > 0.035 && now - lastMobileSeek >= 32) {
+            lastMobileSeek = now;
+            vid.currentTime += Math.abs(diff) > 0.18 ? diff * 0.65 : diff * 0.42;
+          }
+        } else if (Math.abs(diff) > 0.012) {
           vid.currentTime += diff * 0.24;
         }
       }
