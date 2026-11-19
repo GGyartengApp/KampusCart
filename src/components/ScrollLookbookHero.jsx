@@ -64,37 +64,35 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
   useEffect(() => {
     let rafId = null;
     let active = true;
-    let touchPauseTimer = null;
-    const isTouchDevice =
-      typeof window !== 'undefined' &&
-      (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768);
+    let pauseTimer = null;
 
-    const updateTargetTime = (nextProgress) => {
-      const vid = videoRef.current;
-      const dur = vid && vid.duration && !Number.isNaN(vid.duration) ? vid.duration : 9.0;
-      const clipEnd = Math.max(CLIP_START + 1, dur - 0.08);
-      targetTimeRef.current = CLIP_START + nextProgress * (clipEnd - CLIP_START);
-    };
-
-    const advanceByDelta = (deltaY) => {
-      const next = Math.min(1, Math.max(0, progressRef.current + deltaY * 0.00065));
-      progressRef.current = next;
-      setProgress(next);
-      updateTargetTime(next);
-
-      if (next >= 0.995) {
-        progressRef.current = 1;
-        setProgress(1);
-        setUnlocked(true);
-      }
+    const schedulePause = (delay = 150) => {
+      if (pauseTimer) clearTimeout(pauseTimer);
+      pauseTimer = setTimeout(() => {
+        if (videoRef.current && !videoRef.current.paused && !unlocked) {
+          videoRef.current.pause();
+        }
+      }, delay);
     };
 
     const onWheel = (e) => {
       if (unlocked || window.scrollY > 4) return;
-      // Lock page scroll while scrubbing the video; unlock once done
-      if (e.deltaY > 0 || progressRef.current > 0) {
+      const vid = videoRef.current;
+      if (!vid) return;
+
+      if (e.deltaY > 0) {
         e.preventDefault();
-        advanceByDelta(e.deltaY);
+        vid.muted = true;
+        vid.playbackRate = Math.min(1.8, Math.max(1.0, 1.0 + e.deltaY * 0.004));
+        if (vid.paused) {
+          vid.play().catch(() => {});
+        }
+        schedulePause(150);
+      } else if (e.deltaY < 0 && progressRef.current > 0) {
+        e.preventDefault();
+        if (pauseTimer) clearTimeout(pauseTimer);
+        if (!vid.paused) vid.pause();
+        vid.currentTime = Math.max(CLIP_START, vid.currentTime + e.deltaY * 0.004);
       }
     };
 
@@ -110,7 +108,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
         const p = vid.play();
         if (p && typeof p.then === 'function') {
           p.then(() => {
-            if (!touchPauseTimer) vid.pause();
+            if (!pauseTimer) vid.pause();
           }).catch(() => {});
         }
       }
@@ -125,18 +123,13 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
         e.preventDefault();
         const vid = videoRef.current;
         if (vid && deltaY > 0) {
-          // Play natively on mobile while swiping so zero frames or scenes are dropped
+          // Play natively while swiping so zero frames or scenes are dropped
           vid.muted = true;
           vid.playbackRate = Math.min(1.6, Math.max(1.0, 0.95 + deltaY * 0.02));
           if (vid.paused) {
             vid.play().catch(() => {});
           }
-          if (touchPauseTimer) clearTimeout(touchPauseTimer);
-          touchPauseTimer = setTimeout(() => {
-            if (videoRef.current && !videoRef.current.paused) {
-              videoRef.current.pause();
-            }
-          }, 160);
+          schedulePause(160);
         } else if (vid && deltaY < -2) {
           vid.pause();
         }
@@ -144,38 +137,26 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
     };
 
     const onTouchEnd = () => {
-      if (touchPauseTimer) clearTimeout(touchPauseTimer);
-      touchPauseTimer = setTimeout(() => {
-        if (videoRef.current && !videoRef.current.paused && !unlocked) {
-          videoRef.current.pause();
-        }
-      }, 120);
+      schedulePause(120);
     };
 
     const tick = () => {
       if (!active) return;
       const vid = videoRef.current;
       if (vid && vid.readyState >= 1) {
-        if (isTouchDevice) {
-          // Sync progress from native playback so every frame & callout stays in lockstep
-          const dur = vid.duration && !Number.isNaN(vid.duration) ? vid.duration : 9.0;
-          const clipEnd = Math.max(CLIP_START + 1, dur - 0.08);
-          const next = Math.min(1, Math.max(0, (vid.currentTime - CLIP_START) / (clipEnd - CLIP_START)));
-          if (Math.abs(next - progressRef.current) > 0.004) {
-            progressRef.current = next;
-            setProgress(next);
-          }
-          if (next >= 0.995) {
-            vid.pause();
-            progressRef.current = 1;
-            setProgress(1);
-            setUnlocked(true);
-          }
-        } else {
-          const diff = targetTimeRef.current - vid.currentTime;
-          if (Math.abs(diff) > 0.012) {
-            vid.currentTime += diff * 0.24;
-          }
+        // Sync progress from native playback on all devices so full frames & scenes play smoothly
+        const dur = vid.duration && !Number.isNaN(vid.duration) ? vid.duration : 9.0;
+        const clipEnd = Math.max(CLIP_START + 1, dur - 0.08);
+        const next = Math.min(1, Math.max(0, (vid.currentTime - CLIP_START) / (clipEnd - CLIP_START)));
+        if (Math.abs(next - progressRef.current) > 0.004) {
+          progressRef.current = next;
+          setProgress(next);
+        }
+        if (next >= 0.995) {
+          vid.pause();
+          progressRef.current = 1;
+          setProgress(1);
+          setUnlocked(true);
         }
       }
       rafId = requestAnimationFrame(tick);
@@ -189,7 +170,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
 
     return () => {
       active = false;
-      if (touchPauseTimer) clearTimeout(touchPauseTimer);
+      if (pauseTimer) clearTimeout(pauseTimer);
       window.removeEventListener('wheel', onWheel);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
