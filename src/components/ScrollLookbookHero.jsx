@@ -83,11 +83,11 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
       if (e.deltaY > 0) {
         e.preventDefault();
         vid.muted = true;
-        vid.playbackRate = Math.min(1.8, Math.max(1.0, 1.0 + e.deltaY * 0.004));
+        vid.playbackRate = Math.min(2.2, Math.max(1.25, 1.25 + e.deltaY * 0.005));
         if (vid.paused) {
           vid.play().catch(() => {});
         }
-        schedulePause(150);
+        schedulePause(320);
       } else if (e.deltaY < 0 && progressRef.current > 0) {
         e.preventDefault();
         if (pauseTimer) clearTimeout(pauseTimer);
@@ -125,11 +125,11 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
         if (vid && deltaY > 0) {
           // Play natively while swiping so zero frames or scenes are dropped
           vid.muted = true;
-          vid.playbackRate = Math.min(1.6, Math.max(1.0, 0.95 + deltaY * 0.02));
+          vid.playbackRate = Math.min(2.1, Math.max(1.3, 1.3 + deltaY * 0.025));
           if (vid.paused) {
             vid.play().catch(() => {});
           }
-          schedulePause(160);
+          schedulePause(380);
         } else if (vid && deltaY < -2) {
           vid.pause();
         }
@@ -137,7 +137,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
     };
 
     const onTouchEnd = () => {
-      schedulePause(120);
+      schedulePause(300);
     };
 
     const tick = () => {
