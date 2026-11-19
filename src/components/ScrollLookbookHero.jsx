@@ -64,6 +64,10 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
   useEffect(() => {
     let rafId = null;
     let active = true;
+    let touchPauseTimer = null;
+    const isTouchDevice =
+      typeof window !== 'undefined' &&
+      (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768);
 
     const updateTargetTime = (nextProgress) => {
       const vid = videoRef.current;
@@ -87,7 +91,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
 
     const onWheel = (e) => {
       if (unlocked || window.scrollY > 4) return;
-      // Lock page scroll while scrubbing the 10s -> 20s video; unlock once done
+      // Lock page scroll while scrubbing the video; unlock once done
       if (e.deltaY > 0 || progressRef.current > 0) {
         e.preventDefault();
         advanceByDelta(e.deltaY);
@@ -98,7 +102,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
       if (unlocked || window.scrollY > 4) return;
       touchYRef.current = e.touches[0]?.clientY ?? null;
 
-      // Mobile Safari / Chrome require a gesture-triggered play/pause to unlock frame seeking
+      // Mobile Safari / Chrome require a gesture-triggered play/pause to unlock playback
       const vid = videoRef.current;
       if (vid && !videoPrimedRef.current) {
         videoPrimedRef.current = true;
@@ -106,7 +110,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
         const p = vid.play();
         if (p && typeof p.then === 'function') {
           p.then(() => {
-            vid.pause();
+            if (!touchPauseTimer) vid.pause();
           }).catch(() => {});
         }
       }
@@ -119,28 +123,59 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
       touchYRef.current = currentY;
       if (deltaY > 0 || progressRef.current > 0) {
         e.preventDefault();
-        advanceByDelta(deltaY * 1.9);
+        const vid = videoRef.current;
+        if (vid && deltaY > 0) {
+          // Play natively on mobile while swiping so zero frames or scenes are dropped
+          vid.muted = true;
+          vid.playbackRate = Math.min(1.6, Math.max(1.0, 0.95 + deltaY * 0.02));
+          if (vid.paused) {
+            vid.play().catch(() => {});
+          }
+          if (touchPauseTimer) clearTimeout(touchPauseTimer);
+          touchPauseTimer = setTimeout(() => {
+            if (videoRef.current && !videoRef.current.paused) {
+              videoRef.current.pause();
+            }
+          }, 160);
+        } else if (vid && deltaY < -2) {
+          vid.pause();
+        }
       }
     };
 
-    let lastMobileSeek = 0;
-    const isTouchDevice =
-      typeof window !== 'undefined' &&
-      (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768);
+    const onTouchEnd = () => {
+      if (touchPauseTimer) clearTimeout(touchPauseTimer);
+      touchPauseTimer = setTimeout(() => {
+        if (videoRef.current && !videoRef.current.paused && !unlocked) {
+          videoRef.current.pause();
+        }
+      }, 120);
+    };
 
-    const tick = (now = 0) => {
+    const tick = () => {
       if (!active) return;
       const vid = videoRef.current;
       if (vid && vid.readyState >= 1) {
-        const diff = targetTimeRef.current - vid.currentTime;
         if (isTouchDevice) {
-          // Avoid cancelling in-flight mobile hardware decodes; seek only when idle (~30fps)
-          if (!vid.seeking && Math.abs(diff) > 0.035 && now - lastMobileSeek >= 32) {
-            lastMobileSeek = now;
-            vid.currentTime += Math.abs(diff) > 0.18 ? diff * 0.65 : diff * 0.42;
+          // Sync progress from native playback so every frame & callout stays in lockstep
+          const dur = vid.duration && !Number.isNaN(vid.duration) ? vid.duration : 9.0;
+          const clipEnd = Math.max(CLIP_START + 1, dur - 0.08);
+          const next = Math.min(1, Math.max(0, (vid.currentTime - CLIP_START) / (clipEnd - CLIP_START)));
+          if (Math.abs(next - progressRef.current) > 0.004) {
+            progressRef.current = next;
+            setProgress(next);
           }
-        } else if (Math.abs(diff) > 0.012) {
-          vid.currentTime += diff * 0.24;
+          if (next >= 0.995) {
+            vid.pause();
+            progressRef.current = 1;
+            setProgress(1);
+            setUnlocked(true);
+          }
+        } else {
+          const diff = targetTimeRef.current - vid.currentTime;
+          if (Math.abs(diff) > 0.012) {
+            vid.currentTime += diff * 0.24;
+          }
         }
       }
       rafId = requestAnimationFrame(tick);
@@ -149,13 +184,16 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
     window.addEventListener('wheel', onWheel, { passive: false });
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
     rafId = requestAnimationFrame(tick);
 
     return () => {
       active = false;
+      if (touchPauseTimer) clearTimeout(touchPauseTimer);
       window.removeEventListener('wheel', onWheel);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, [unlocked]);
