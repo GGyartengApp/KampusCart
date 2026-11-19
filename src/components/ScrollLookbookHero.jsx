@@ -53,6 +53,7 @@ const CALLOUTS = [
 
 export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
   const videoRef = useRef(null);
+  const heroRef = useRef(null);
   const progressRef = useRef(0);
   const targetTimeRef = useRef(CLIP_START);
   const touchYRef = useRef(null);
@@ -183,8 +184,27 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
   const introOpacity = Math.max(0, 1 - progress * 5.2);
   const showFinale = unlocked || progress >= 0.86;
 
+  const handleSkipToStore = () => {
+    const vid = videoRef.current;
+    if (vid) {
+      vid.pause();
+      const dur = vid.duration && !Number.isNaN(vid.duration) ? vid.duration : 9.0;
+      vid.currentTime = Math.max(CLIP_START, dur - 0.08);
+    }
+    progressRef.current = 1;
+    setProgress(1);
+    setUnlocked(true);
+    if (heroRef.current) {
+      window.scrollTo({
+        top: heroRef.current.offsetTop + heroRef.current.offsetHeight,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <section
+      ref={heroRef}
       className={`lookbook-hero${unlocked ? '' : ' lookbook-hero--locked'}`}
       style={{
         position: 'relative',
@@ -214,6 +234,18 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
           objectPosition: 'center 18%',
         }}
       />
+
+      {/* Mobile-only 1-Tap Skip to Store (hidden on desktop/laptop) */}
+      {!unlocked && (
+        <button
+          type="button"
+          className="lookbook-skip-btn"
+          onClick={handleSkipToStore}
+          aria-label="Skip lookbook and scroll to store"
+        >
+          Skip <ChevronDown size={14} />
+        </button>
+      )}
 
       {/* Subtle Neutral Editorial Gradient Scrim + Bottom Seam Blend */}
       <div

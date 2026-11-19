@@ -1118,6 +1118,10 @@ button {
   }
 }
 
+.lookbook-skip-btn {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 0 14px;
@@ -1158,6 +1162,27 @@ button {
   }
   .shopcart-hero {
     padding: 28px 0;
+  }
+  .lookbook-skip-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 7;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: rgba(24, 22, 20, 0.56);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
   }
   .lookbook-hero {
     height: calc(100dvh - 64px) !important;
