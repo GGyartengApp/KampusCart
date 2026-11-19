@@ -247,14 +247,17 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
         </button>
       )}
 
-      {/* Subtle Neutral Editorial Gradient Scrim + Bottom Seam Blend */}
+      {/* Bottom Seam Blend only (no overlay over the video) */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
-          inset: 0,
-          background:
-            'linear-gradient(180deg, rgba(24,22,20,0) 80%, #181614 100%), linear-gradient(90deg, rgba(17,16,14,0.62) 0%, rgba(17,16,14,0.22) 46%, rgba(17,16,14,0.04) 100%)',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 56,
+          pointerEvents: 'none',
+          background: 'linear-gradient(180deg, rgba(24,22,20,0) 0%, #181614 100%)',
         }}
       />
 
