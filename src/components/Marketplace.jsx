@@ -217,23 +217,6 @@ export default function Marketplace({
               Filter by your Hall, Faculty, Price, Rating, or Delivery Option. Verified student sellers only.
             </p>
           </div>
-
-          <img
-            src="/images/podium/campus-tech.jpg"
-            alt="Campus Essentials"
-            style={{
-              position: 'relative',
-              zIndex: 1,
-              width: 148,
-              height: 102,
-              objectFit: 'cover',
-              borderRadius: 14,
-              border: '2.5px solid #111827',
-              boxShadow: '5px 5px 0 #111827',
-              transform: 'rotate(2deg)',
-              display: 'block',
-            }}
-          />
         </div>
       )}
 
