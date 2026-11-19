@@ -61,6 +61,8 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
 
   const [progress, setProgress] = useState(0);
   const [unlocked, setUnlocked] = useState(isMobile);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   useEffect(() => {
     let rafId = null;
@@ -179,30 +181,80 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
         width: '100%',
         height: 'calc(100vh - 70px)',
         overflow: 'hidden',
-        background: '#181614',
+        background: 'radial-gradient(circle at 60% 35%, #d6cfc3 0%, #8f8678 52%, #24211e 100%)',
       }}
     >
-      {/* Studio Video (auto-plays once on mobile; scroll-driven on desktop) */}
-      <video
-        ref={videoRef}
-        className="lookbook-video"
-        src="/videos/hero-lookbook.mp4#t=0.001"
-        autoPlay={isMobile}
-        muted
-        playsInline
-        preload="auto"
-        onLoadedMetadata={(e) => {
-          e.currentTarget.currentTime = CLIP_START;
-        }}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center 18%',
-        }}
-      />
+      {/* Fallback image if video fails to load */}
+      {videoError && (
+        <img
+          src="/images/podium/sneakers.jpg"
+          alt="KampusCart Campus Lookbook"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      )}
+
+      {/* Subtle loading indicator behind video until first frame is buffered */}
+      {!videoLoaded && !videoError && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: 22,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 2,
+            padding: '5px 14px',
+            borderRadius: 999,
+            background: 'rgba(24, 22, 20, 0.45)',
+            backdropFilter: 'blur(10px)',
+            color: 'rgba(255, 255, 255, 0.85)',
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 11,
+            fontWeight: 500,
+          }}
+        >
+          Loading lookbook…
+        </div>
+      )}
+
+      {/* Studio Video (auto-plays once on mobile; scroll-driven on desktop; PiP disabled for Edge) */}
+      {!videoError && (
+        <video
+          ref={videoRef}
+          className="lookbook-video"
+          src="/videos/hero-lookbook.mp4#t=0.001"
+          autoPlay={isMobile}
+          muted
+          playsInline
+          preload="auto"
+          disablePictureInPicture
+          disableRemotePlayback
+          controlsList="nodownload noplaybackrate nopictureinpicture"
+          onLoadedMetadata={(e) => {
+            e.currentTarget.currentTime = CLIP_START;
+          }}
+          onLoadedData={() => setVideoLoaded(true)}
+          onError={() => {
+            setVideoError(true);
+            setUnlocked(true);
+          }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 18%',
+            pointerEvents: 'none',
+          }}
+        />
+      )}
 
       {/* 1-Tap Skip to Store (always available on mobile, or until unlocked on desktop) */}
       {(isMobile || !unlocked) && (
