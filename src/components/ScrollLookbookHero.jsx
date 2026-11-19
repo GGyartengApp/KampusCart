@@ -60,7 +60,6 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
 
   const [progress, setProgress] = useState(0);
   const [unlocked, setUnlocked] = useState(false);
-  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     let rafId = null;
@@ -103,11 +102,11 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
       const vid = videoRef.current;
       if (vid && !videoPrimedRef.current) {
         videoPrimedRef.current = true;
+        vid.muted = true;
         const p = vid.play();
         if (p && typeof p.then === 'function') {
           p.then(() => {
             vid.pause();
-            setVideoReady(true);
           }).catch(() => {});
         }
       }
@@ -127,7 +126,7 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
     const tick = () => {
       if (!active) return;
       const vid = videoRef.current;
-      if (vid && vid.readyState >= 2) {
+      if (vid && vid.readyState >= 1) {
         const diff = targetTimeRef.current - vid.currentTime;
         if (Math.abs(diff) > 0.012) {
           vid.currentTime += diff * 0.24;
@@ -165,19 +164,16 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
         background: '#181614',
       }}
     >
-      {/* Scroll-scrubbed Studio Video (0s -> end) */}
+      {/* Scroll-scrubbed Studio Video (0s -> end); #t=0.001 forces iOS/Android to render frame 0 */}
       <video
         ref={videoRef}
         className="lookbook-video"
-        src="/videos/hero-lookbook.mp4"
+        src="/videos/hero-lookbook.mp4#t=0.001"
         muted
         playsInline
         preload="auto"
         onLoadedMetadata={(e) => {
           e.currentTarget.currentTime = CLIP_START;
-        }}
-        onLoadedData={() => {
-          setVideoReady(true);
         }}
         style={{
           position: 'absolute',
@@ -186,8 +182,6 @@ export default function ScrollLookbookHero({ onBrowse, onStartSelling }) {
           height: '100%',
           objectFit: 'cover',
           objectPosition: 'center 18%',
-          opacity: videoReady ? 1 : 0,
-          transition: 'opacity 0.25s ease',
         }}
       />
 
