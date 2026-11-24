@@ -48,6 +48,17 @@ function loadMergedProducts() {
   return [...hydrated, ...missing];
 }
 
+const DEMO_ACCOUNT = {
+  name: 'Alex Rivera',
+  email: 'arivera@campus.edu',
+  studentId: 'KC-2026-9012',
+  hall: 'North Hall',
+  faculty: 'Engineering',
+  role: 'buyer',
+  password: 'campus123',
+  verified: true,
+};
+
 export default function App() {
   const [activePage, setActivePage] = useState('home');
   const [role, setRole] = useState('buyer');
@@ -55,7 +66,11 @@ export default function App() {
   const [selectedHall, setSelectedHall] = useState('All Halls');
   const [searchQuery, setSearchQuery] = useState('');
 
+  const [accounts, setAccounts] = useState(() => loadState('kc_accounts', [DEMO_ACCOUNT]));
   const [user, setUser] = useState(() => loadState('kc_user', null));
+  const [authMode, setAuthMode] = useState('signin');
+  const [authReturnPage, setAuthReturnPage] = useState(null);
+  const [authNotice, setAuthNotice] = useState('');
   const [products, setProducts] = useState(loadMergedProducts);
   const [sellers, setSellers] = useState(() => loadState('kc_sellers', INITIAL_SELLERS));
   const [pendingSellers, setPendingSellers] = useState(() =>
@@ -87,6 +102,7 @@ export default function App() {
 
   useEffect(() => {
     try {
+      localStorage.setItem('kc_accounts', JSON.stringify(accounts));
       localStorage.setItem('kc_user', JSON.stringify(user));
       localStorage.setItem('kc_products', JSON.stringify(products));
       localStorage.setItem('kc_sellers', JSON.stringify(sellers));
@@ -102,7 +118,7 @@ export default function App() {
     } catch {
       // ignore storage quota errors
     }
-  }, [user, products, sellers, pendingSellers, reviews, promoCodes, orders, disputes, partnerships, cart, wishlist, chatMessages]);
+  }, [accounts, user, products, sellers, pendingSellers, reviews, promoCodes, orders, disputes, partnerships, cart, wishlist, chatMessages]);
 
   const notify = (msg) => {
     setToast(msg);
@@ -111,6 +127,45 @@ export default function App() {
 
   const addNotification = (title) => {
     setNotifications((prev) => [{ id: `n-${Date.now()}`, title, time: 'Just now', read: false }, ...prev]);
+  };
+
+  const openAuthPage = (mode = 'signin', returnTo = null, notice = '') => {
+    setAuthMode(mode === 'signup' ? 'signup' : 'signin');
+    setAuthReturnPage(returnTo);
+    setAuthNotice(notice);
+    setAuthOpen(true);
+  };
+
+  const handleStartSellingFlow = () => {
+    if (!user) {
+      openAuthPage('signup', 'seller', 'Sign in or create a student account to launch your free campus storefront.');
+      return;
+    }
+    setRole('seller');
+    setActivePage('seller');
+  };
+
+  const handleSignInSuccess = (account) => {
+    const { password: _pw, ...safeUser } = account;
+    setUser(safeUser);
+    if (safeUser.role === 'seller') setRole('seller');
+    notify(`Welcome back, ${safeUser.name}!`);
+    const target = authReturnPage || (safeUser.role === 'seller' ? 'seller' : 'home');
+    setAuthReturnPage(null);
+    setAuthNotice('');
+    setActivePage(target);
+  };
+
+  const handleSignUpSuccess = (newAccount) => {
+    setAccounts((prev) => [newAccount, ...prev]);
+    const { password: _pw, ...safeUser } = newAccount;
+    setUser(safeUser);
+    if (safeUser.role === 'seller') setRole('seller');
+    notify(`Welcome to KampusCart, ${safeUser.name}! Student ID verified.`);
+    const target = authReturnPage || (safeUser.role === 'seller' ? 'seller' : 'home');
+    setAuthReturnPage(null);
+    setAuthNotice('');
+    setActivePage(target);
   };
 
   const handleBrowseCategory = (cat) => {
@@ -146,7 +201,7 @@ export default function App() {
           sellerId: product.sellerId,
           colorName: chosenColor,
           art: product.art,
-          color: product.colors[0] || '#0b462d',
+          color: product.colors[0] || '#18181b',
         },
       ];
     });
@@ -165,7 +220,7 @@ export default function App() {
         sellerId: product.sellerId,
         colorName: chosenColor,
         art: product.art,
-        color: product.colors[0] || '#0b462d',
+        color: product.colors[0] || '#18181b',
       },
     ]);
     setCheckoutOpen(true);
@@ -280,7 +335,7 @@ export default function App() {
         notifications={notifications}
         onOpenCart={() => setCartOpen(true)}
         onOpenWishlist={() => setWishlistOpen(true)}
-        onOpenAuth={() => setAuthOpen(true)}
+        onOpenAuth={(mode = 'signin') => openAuthPage(mode)}
         onSelectProduct={(p) => setSelectedProduct(p)}
         user={user}
         role={role}
@@ -296,7 +351,7 @@ export default function App() {
             <HeroSection
               products={products}
               onBrowse={handleBrowseCategory}
-              onStartSelling={() => setActivePage('seller')}
+              onStartSelling={handleStartSellingFlow}
               onSelectProduct={(p) => setSelectedProduct(p)}
             />
             <HomeSections
@@ -307,7 +362,7 @@ export default function App() {
               onAddToCart={handleAddToCart}
               onSelectProduct={(p) => setSelectedProduct(p)}
               onBrowseCategory={handleBrowseCategory}
-              onOpenAuth={() => setAuthOpen(true)}
+              onOpenAuth={() => openAuthPage('signup', null, 'Verify your student account to unlock promo code CAMPUS25.')}
               onNavigate={setActivePage}
             />
           </>
@@ -361,7 +416,7 @@ export default function App() {
                   id: `prod-${Date.now()}`,
                   rating: 5.0,
                   reviewCount: 0,
-                  colors: ['#0b462d', '#f58220'],
+                  colors: ['#18181b', '#f58220'],
                   colorNames: ['Classic', 'Campus Edition'],
                   featured: false,
                   status: 'approved',
@@ -550,16 +605,22 @@ export default function App() {
 
       <AuthModal
         isOpen={authOpen}
+        initialMode={authMode}
         user={user}
-        onClose={() => setAuthOpen(false)}
-        onLogin={(u) => {
-          setUser(u);
-          notify(`Welcome, ${u.name}! Student ID verified.`);
+        accounts={accounts}
+        contextNotice={authNotice}
+        onClose={() => {
+          setAuthOpen(false);
+          setAuthNotice('');
         }}
+        onSignIn={handleSignInSuccess}
+        onSignUp={handleSignUpSuccess}
         onLogout={() => {
           setUser(null);
+          setRole('buyer');
           notify('Signed out of KampusCart.');
         }}
+        onNavigate={setActivePage}
       />
 
       <ChatDrawer

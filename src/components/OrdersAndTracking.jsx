@@ -76,7 +76,7 @@ export default function OrdersAndTracking({
                     >
                       {order.status}
                     </span>
-                    <strong style={{ fontSize: 16, color: '#0b462d' }}>GH₵{order.total.toFixed(2)}</strong>
+                    <strong style={{ fontSize: 16, color: '#18181b' }}>GH₵{order.total.toFixed(2)}</strong>
                   </div>
                 </div>
 
@@ -90,11 +90,11 @@ export default function OrdersAndTracking({
                           style={{
                             height: 6,
                             borderRadius: 999,
-                            background: done ? '#0b462d' : '#e2e8f0',
+                            background: done ? '#18181b' : '#e2e8f0',
                             marginBottom: 6,
                           }}
                         />
-                        <span style={{ fontSize: 11, fontWeight: done ? 700 : 500, color: done ? '#0b462d' : '#94a3b8' }}>
+                        <span style={{ fontSize: 11, fontWeight: done ? 700 : 500, color: done ? '#18181b' : '#94a3b8' }}>
                           {step}
                         </span>
                       </div>

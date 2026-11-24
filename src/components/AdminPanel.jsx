@@ -45,7 +45,7 @@ export default function AdminPanel({
         <div className="stat-card">
           <div style={{ fontSize: 12, color: '#64748b', display: 'flex', justifyContent: 'space-between' }}>
             <span>Verified Sellers Onboarded</span>
-            <ShieldCheck size={16} color="#0b462d" />
+            <ShieldCheck size={16} color="#18181b" />
           </div>
           <div style={{ fontSize: 24, fontWeight: 800, marginTop: 6 }}>{sellers.length}</div>
           <div style={{ fontSize: 11, color: '#d97706', marginTop: 4 }}>{pendingSellers.length} pending verification</div>
@@ -56,7 +56,7 @@ export default function AdminPanel({
             <span>Commissions Earned (5%)</span>
             <TrendingUp size={16} color="#16a34a" />
           </div>
-          <div style={{ fontSize: 24, fontWeight: 800, marginTop: 6, color: '#0b462d' }}>
+          <div style={{ fontSize: 24, fontWeight: 800, marginTop: 6, color: '#18181b' }}>
             GH₵{totalCommissions.toFixed(2)}
           </div>
           <div style={{ fontSize: 11, color: '#64748b', marginTop: 4 }}>{completedOrders.length} completed orders</div>
@@ -134,7 +134,7 @@ export default function AdminPanel({
                         </td>
                         <td>
                           {ps.owner}
-                          <div style={{ fontSize: 11, color: '#0b462d', fontWeight: 600 }}>
+                          <div style={{ fontSize: 11, color: '#18181b', fontWeight: 600 }}>
                             {ps.studentId} • {ps.email}
                           </div>
                         </td>
@@ -328,7 +328,7 @@ export default function AdminPanel({
                   <Megaphone size={16} color="#f58220" /> {ad.brand}
                 </div>
                 <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{ad.placement}</div>
-                <div style={{ fontSize: 12, color: '#0b462d', fontWeight: 600, marginTop: 2 }}>{ad.discount}</div>
+                <div style={{ fontSize: 12, color: '#18181b', fontWeight: 600, marginTop: 2 }}>{ad.discount}</div>
               </div>
               <button
                 type="button"

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ProductIllustration({ art = 'sneaker', color = '#0b462d', accent = '#f58220', size = 120 }) {
+export default function ProductIllustration({ art = 'sneaker', color = '#18181b', accent = '#f58220', size = 120 }) {
   const s = size;
 
   if (art === 'headphones') {

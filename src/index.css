@@ -1,8 +1,8 @@
 :root {
-  --forest-dark: #0e3329;
-  --forest: #133c31;
-  --emerald: #0b462d;
-  --emerald-hover: #083522;
+  --forest-dark: #141312;
+  --forest: #1c1a18;
+  --emerald: #18181b;
+  --emerald-hover: #27272a;
   --sky-banner: #cdebf4;
   --podium-gold: #f5c946;
   --podium-gold-dark: #e2b22c;
@@ -21,7 +21,7 @@
   --radius-lg: 22px;
   --radius-pill: 9999px;
   --shadow-soft: 0 8px 28px rgba(15, 23, 42, 0.06);
-  --shadow-float: 0 14px 36px rgba(16, 55, 45, 0.14);
+  --shadow-float: 0 14px 36px rgba(20, 19, 18, 0.14);
 }
 
 *,
@@ -848,7 +848,7 @@ button {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(115deg, #0b2d23 0%, #134435 58%, #1e5946 100%);
+  background: linear-gradient(115deg, #141312 0%, #1f1d1b 58%, #2c2825 100%);
   border-radius: 28px;
   transform: skewY(2.2deg);
   transform-origin: top left;
@@ -1118,6 +1118,107 @@ button {
   }
 }
 
+/* Animated Split Sign In / Sign Up Modal */
+.auth-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.56);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+.auth-modal-shell {
+  position: relative;
+  width: 100%;
+  max-width: 880px;
+  min-height: 540px;
+  background: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 32px 72px rgba(0, 0, 0, 0.34);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f172a;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.auth-modal-panel {
+  position: relative;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.auth-modal-picture {
+  position: relative;
+  overflow: hidden;
+  background: #141312;
+  z-index: 2;
+}
+
+.auth-modal-picture-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.auth-modal-picture-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(20, 19, 18, 0.72) 0%, rgba(20, 19, 18, 0.88) 100%);
+}
+
+.auth-modal-picture-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 34px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.auth-modal-fields {
+  padding: 32px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #ffffff;
+  z-index: 1;
+}
+
+/* Smooth animated swap when switching between Sign In and Sign Up */
+.auth-modal-shell--signup .auth-modal-picture {
+  transform: translateX(100%);
+}
+
+.auth-modal-shell--signup .auth-modal-fields {
+  transform: translateX(-100%);
+}
+
 .lookbook-skip-btn {
   position: absolute;
   top: 22px;
@@ -1219,6 +1320,25 @@ button {
   }
   .shopcart-hero {
     padding: 28px 0;
+  }
+  .auth-modal-shell {
+    grid-template-columns: 1fr;
+    max-height: 92vh;
+    overflow-y: auto;
+    min-height: auto;
+  }
+  .auth-modal-picture {
+    min-height: 210px;
+  }
+  .auth-modal-picture-content {
+    padding: 22px 20px;
+  }
+  .auth-modal-fields {
+    padding: 22px 20px;
+  }
+  .auth-modal-shell--signup .auth-modal-picture,
+  .auth-modal-shell--signup .auth-modal-fields {
+    transform: none;
   }
   .lookbook-skip-btn {
     top: 14px;

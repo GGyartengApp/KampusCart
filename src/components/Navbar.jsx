@@ -97,7 +97,7 @@ export default function Navbar({
                     <button
                       type="button"
                       onClick={() => handleCategoryClick('All')}
-                      style={{ background: 'none', border: 'none', color: '#0b462d', fontWeight: 700, fontSize: 12 }}
+                      style={{ background: 'none', border: 'none', color: '#18181b', fontWeight: 700, fontSize: 12 }}
                     >
                       View All →
                     </button>
@@ -229,7 +229,7 @@ export default function Navbar({
                         </div>
                       </div>
                     </div>
-                    <strong style={{ fontSize: 13, color: '#0b462d' }}>GH₵{item.price.toFixed(2)}</strong>
+                    <strong style={{ fontSize: 13, color: '#18181b' }}>GH₵{item.price.toFixed(2)}</strong>
                   </button>
                 ))}
               </div>
@@ -293,15 +293,16 @@ export default function Navbar({
             <button
               type="button"
               className="icon-pill-btn"
-              onClick={onOpenAuth}
+              onClick={() => onOpenAuth('signin')}
               style={{
-                background: user ? '#ecfdf5' : '#ffffff',
-                borderColor: user ? '#a7f3d0' : '#e5e7eb',
+                background: user ? '#ecfdf5' : '#18181b',
+                borderColor: user ? '#a7f3d0' : '#18181b',
+                color: user ? '#0f172a' : '#ffffff',
               }}
             >
               {user ? <ShieldCheck size={16} color="#047857" /> : <User size={16} />}
               <span style={{ maxWidth: 90, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {user ? user.name.split(' ')[0] : 'Student ID'}
+                {user ? user.name.split(' ')[0] : 'Sign In'}
               </span>
             </button>
 
@@ -336,13 +337,18 @@ export default function Navbar({
                 { id: 'seller', label: 'Seller Hub' },
                 { id: 'admin', label: 'Admin Panel' },
                 { id: 'about', label: 'How It Works & FAQ' },
+                { id: 'signin', label: user ? 'Account' : 'Sign In / Sign Up' },
               ].map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   className="btn-outline btn-sm"
                   onClick={() => {
-                    setActivePage(item.id);
+                    if (item.id === 'signin' || item.id === 'signup') {
+                      onOpenAuth(item.id);
+                    } else {
+                      setActivePage(item.id);
+                    }
                     setMobileMenu(false);
                   }}
                 >

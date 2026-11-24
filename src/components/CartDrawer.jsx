@@ -12,7 +12,7 @@ export default function CartDrawer({ isOpen, items, onClose, onUpdateQty, onRemo
       <div className="drawer-panel" onClick={(e) => e.stopPropagation()}>
         <div style={{ padding: '18px 20px', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <ShoppingBag size={18} color="#0b462d" />
+            <ShoppingBag size={18} color="#18181b" />
             <strong style={{ fontSize: 16 }}>Your Campus Cart ({items.reduce((s, i) => s + i.qty, 0)})</strong>
           </div>
           <button type="button" onClick={onClose} style={{ background: 'none', border: 'none' }}>
@@ -81,7 +81,7 @@ export default function CartDrawer({ isOpen, items, onClose, onUpdateQty, onRemo
           <div style={{ padding: 20, borderTop: '1px solid #e2e8f0', background: '#f8fafc' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 14, fontSize: 15 }}>
               <span>Subtotal</span>
-              <strong style={{ color: '#0b462d' }}>GH₵{subtotal.toFixed(2)}</strong>
+              <strong style={{ color: '#18181b' }}>GH₵{subtotal.toFixed(2)}</strong>
             </div>
             <button type="button" className="btn-primary" style={{ width: '100%' }} onClick={onCheckout}>
               Proceed to Checkout

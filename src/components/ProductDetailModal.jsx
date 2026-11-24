@@ -21,7 +21,7 @@ export default function ProductDetailModal({
 
   if (!product) return null;
 
-  const activeColor = product.colors[selectedColorIdx] || '#0b462d';
+  const activeColor = product.colors[selectedColorIdx] || '#18181b';
   const activeColorName = product.colorNames?.[selectedColorIdx] || 'Standard';
   const productReviews = reviews.filter((r) => r.productId === product.id && r.status === 'visible');
 
@@ -103,7 +103,7 @@ export default function ProductDetailModal({
                     height: 62,
                     borderRadius: 12,
                     background: '#f7f7f7',
-                    border: selectedColorIdx === idx ? '2px solid #0b462d' : '1px solid #e2e8f0',
+                    border: selectedColorIdx === idx ? '2px solid #18181b' : '1px solid #e2e8f0',
                     display: 'grid',
                     placeItems: 'center',
                   }}
@@ -128,7 +128,7 @@ export default function ProductDetailModal({
             </div>
 
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, padding: '12px 0', borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', marginBottom: 14 }}>
-              <strong style={{ fontSize: 24, color: '#0b462d' }}>GH₵{product.price.toFixed(2)}</strong>
+              <strong style={{ fontSize: 24, color: '#18181b' }}>GH₵{product.price.toFixed(2)}</strong>
               {product.originalPrice > product.price && (
                 <span style={{ textDecoration: 'line-through', color: '#94a3b8', fontSize: 14 }}>
                   GH₵{product.originalPrice.toFixed(2)}
@@ -142,7 +142,7 @@ export default function ProductDetailModal({
             {/* Color / Variant Swatches */}
             <div style={{ marginBottom: 16 }}>
               <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>
-                Choose Option: <span style={{ color: '#0b462d' }}>{activeColorName}</span>
+                Choose Option: <span style={{ color: '#18181b' }}>{activeColorName}</span>
               </div>
               <div style={{ display: 'flex', gap: 10 }}>
                 {product.colors.map((c, idx) => (
@@ -157,7 +157,7 @@ export default function ProductDetailModal({
                       borderRadius: '50%',
                       background: c,
                       border: selectedColorIdx === idx ? '3px solid #ffffff' : '1px solid #cbd5e1',
-                      boxShadow: selectedColorIdx === idx ? '0 0 0 2px #0b462d' : 'none',
+                      boxShadow: selectedColorIdx === idx ? '0 0 0 2px #18181b' : 'none',
                     }}
                   />
                 ))}
@@ -203,7 +203,7 @@ export default function ProductDetailModal({
               <button
                 type="button"
                 className="btn-outline"
-                style={{ flex: 1, borderColor: '#0b462d', color: '#0b462d' }}
+                style={{ flex: 1, borderColor: '#18181b', color: '#18181b' }}
                 disabled={product.stock <= 0}
                 onClick={() => onAddToCart(product, qty, activeColorName)}
               >
@@ -220,7 +220,7 @@ export default function ProductDetailModal({
                 </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13 }}>
-                <MapPin size={16} color="#0b462d" />
+                <MapPin size={16} color="#18181b" />
                 <span>Safe Meet-up Available at Main Library &amp; Student Union</span>
               </div>
 

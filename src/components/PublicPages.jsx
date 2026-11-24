@@ -18,21 +18,21 @@ export default function PublicPages({ onNotify }) {
 
         <div className="collection-grid" style={{ marginTop: 22 }}>
           <div style={{ background: '#f8fafc', borderRadius: 16, padding: 22, border: '1px solid #e2e8f0' }}>
-            <strong style={{ color: '#0b462d', fontSize: 13 }}>STEP 01</strong>
+            <strong style={{ color: '#18181b', fontSize: 13 }}>STEP 01</strong>
             <h3 style={{ margin: '8px 0 6px' }}>Verify Your Student ID</h3>
             <p style={{ margin: 0, fontSize: 13, color: '#64748b' }}>
               Sign up with your .edu email and Student ID. Only verified students can sell on KampusCart.
             </p>
           </div>
           <div style={{ background: '#f8fafc', borderRadius: 16, padding: 22, border: '1px solid #e2e8f0' }}>
-            <strong style={{ color: '#0b462d', fontSize: 13 }}>STEP 02</strong>
+            <strong style={{ color: '#18181b', fontSize: 13 }}>STEP 02</strong>
             <h3 style={{ margin: '8px 0 6px' }}>Browse or Open a Free Store</h3>
             <p style={{ margin: 0, fontSize: 13, color: '#64748b' }}>
               Filter by Hall, Faculty, Price, or Delivery Option. Sellers list for free with zero monthly fees.
             </p>
           </div>
           <div style={{ background: '#f8fafc', borderRadius: 16, padding: 22, border: '1px solid #e2e8f0' }}>
-            <strong style={{ color: '#0b462d', fontSize: 13 }}>STEP 03</strong>
+            <strong style={{ color: '#18181b', fontSize: 13 }}>STEP 03</strong>
             <h3 style={{ margin: '8px 0 6px' }}>Safe Meet-up &amp; Escrow Release</h3>
             <p style={{ margin: 0, fontSize: 13, color: '#64748b' }}>
               Meet at staffed Safe Campus Points. Payouts release after the buyer confirms receipt.
@@ -42,7 +42,7 @@ export default function PublicPages({ onNotify }) {
       </section>
 
       {/* Pricing & Fees */}
-      <section style={{ background: '#133c31', color: '#ffffff', borderRadius: 22, padding: 32 }}>
+      <section style={{ background: '#1c1a18', color: '#ffffff', borderRadius: 22, padding: 32 }}>
         <h2 style={{ margin: '0 0 8px' }}>Transparent Pricing &amp; Fees</h2>
         <p style={{ margin: '0 0 20px', opacity: 0.85, fontSize: 14 }}>
           Built for student hustlers — you only pay when you make a completed sale.
@@ -89,7 +89,7 @@ export default function PublicPages({ onNotify }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 14 }}>
             {SAFE_MEETUP_POINTS.map((mp) => (
               <div key={mp.id} style={{ border: '1px solid #e2e8f0', borderRadius: 14, padding: 16, background: '#f8fafc' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: '#0b462d' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: '#18181b' }}>
                   <MapPin size={16} /> {mp.name}
                 </div>
                 <div style={{ fontSize: 12, color: '#475569', marginTop: 4 }}>{mp.hours}</div>

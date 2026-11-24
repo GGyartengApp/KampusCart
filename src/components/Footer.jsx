@@ -9,7 +9,7 @@ export default function Footer({ onNavigate, onBrowseCategory }) {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
               <div className="brand-icon" style={{ width: 32, height: 32, fontSize: 13 }}>KC</div>
-              <strong style={{ fontSize: 18, color: '#0b462d' }}>KampusCart</strong>
+              <strong style={{ fontSize: 18, color: '#18181b' }}>KampusCart</strong>
             </div>
             <p style={{ fontSize: 12, color: '#64748b', lineHeight: 1.6, margin: '0 0 12px' }}>
               Mobile-first campus marketplace connecting verified student entrepreneurs to buyers across every hall.

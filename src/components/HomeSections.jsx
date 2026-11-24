@@ -201,7 +201,7 @@ export default function HomeSections({
           <div
             className="collection-card"
             style={{
-              background: 'linear-gradient(135deg, #133c31, #0b462d)',
+              background: 'linear-gradient(135deg, #1c1a18, #18181b)',
               color: '#ffffff',
               textAlign: 'center',
               justifyContent: 'center',
@@ -278,7 +278,7 @@ export default function HomeSections({
             onClick={() => onNavigate('about')}
             style={{ background: '#f8fafc', borderRadius: 18, padding: 24, border: '1px solid #e2e8f0', cursor: 'pointer' }}
           >
-            <HelpCircle size={28} color="#0b462d" />
+            <HelpCircle size={28} color="#18181b" />
             <h3 style={{ margin: '14px 0 6px', fontSize: 18 }}>Frequently Asked Questions</h3>
             <p style={{ margin: 0, fontSize: 13, color: '#64748b' }}>
               Updates on Safe Shopping on Campus, Student ID verification, and 5% seller commission.
@@ -289,7 +289,7 @@ export default function HomeSections({
             onClick={() => onNavigate('about')}
             style={{ background: '#f8fafc', borderRadius: 18, padding: 24, border: '1px solid #e2e8f0', cursor: 'pointer' }}
           >
-            <CreditCard size={28} color="#0b462d" />
+            <CreditCard size={28} color="#18181b" />
             <h3 style={{ margin: '14px 0 6px', fontSize: 18 }}>Online Payment Process</h3>
             <p style={{ margin: 0, fontSize: 13, color: '#64748b' }}>
               Pay securely with Mobile Money, Card, or Pay on Delivery. Escrow protects every order.
@@ -300,7 +300,7 @@ export default function HomeSections({
             onClick={() => onNavigate('about')}
             style={{ background: '#f8fafc', borderRadius: 18, padding: 24, border: '1px solid #e2e8f0', cursor: 'pointer' }}
           >
-            <MapPin size={28} color="#0b462d" />
+            <MapPin size={28} color="#18181b" />
             <h3 style={{ margin: '14px 0 6px', fontSize: 18 }}>Safe Campus Meet-Up Points</h3>
             <p style={{ margin: 0, fontSize: 13, color: '#64748b' }}>
               Choose staffed campus spots like Main Library Lobby or Student Union Plaza, or dorm delivery.
@@ -432,7 +432,7 @@ export default function HomeSections({
           <span
             style={{
               background: '#ffffff',
-              color: '#0e3329',
+              color: '#141312',
               fontWeight: 800,
               fontSize: 15,
               padding: '10px 18px',

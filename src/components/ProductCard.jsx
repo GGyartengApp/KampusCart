@@ -22,7 +22,7 @@ export default function ProductCard({
         ) : (
           <ProductIllustration
             art={product.art}
-            color={product.colors[0] || '#0b462d'}
+            color={product.colors[0] || '#18181b'}
             accent={product.colors[1] || '#f58220'}
             size={128}
           />
@@ -34,7 +34,7 @@ export default function ProductCard({
               position: 'absolute',
               top: 10,
               left: 10,
-              background: '#0e3329',
+              background: '#141312',
               color: '#fde047',
               fontSize: 10,
               fontWeight: 700,
@@ -73,7 +73,7 @@ export default function ProductCard({
         >
           {product.title}
         </h3>
-        <strong style={{ fontSize: 15, color: '#0b462d', whiteSpace: 'nowrap' }}>
+        <strong style={{ fontSize: 15, color: '#18181b', whiteSpace: 'nowrap' }}>
           GH₵{product.price.toFixed(2)}
         </strong>
       </div>
@@ -104,8 +104,8 @@ export default function ProductCard({
           disabled={product.stock <= 0}
           onClick={() => onAddToCart(product)}
           style={{
-            borderColor: '#0b462d',
-            color: '#0b462d',
+            borderColor: '#18181b',
+            color: '#18181b',
             opacity: product.stock <= 0 ? 0.5 : 1,
           }}
         >

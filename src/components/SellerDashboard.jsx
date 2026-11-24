@@ -183,9 +183,9 @@ export default function SellerDashboard({
             <div className="stat-card">
               <div style={{ display: 'flex', justifyContent: 'space-between', color: '#64748b', fontSize: 12 }}>
                 <span>Net Earnings (95%)</span>
-                <DollarSign size={16} color="#0b462d" />
+                <DollarSign size={16} color="#18181b" />
               </div>
-              <div style={{ fontSize: 24, fontWeight: 800, marginTop: 6, color: '#0b462d' }}>
+              <div style={{ fontSize: 24, fontWeight: 800, marginTop: 6, color: '#18181b' }}>
                 GH₵{completedRevenue.toFixed(2)}
               </div>
               <div style={{ fontSize: 11, color: '#64748b', marginTop: 4 }}>After 5% platform fee</div>
@@ -222,7 +222,7 @@ export default function SellerDashboard({
           {/* Storefront Bio Card */}
           <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 14, padding: 18, marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: '#133c31', color: '#fde047', display: 'grid', placeItems: 'center' }}>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: '#1c1a18', color: '#fde047', display: 'grid', placeItems: 'center' }}>
                 <Store size={22} />
               </div>
               <div>
@@ -310,7 +310,7 @@ export default function SellerDashboard({
             style={{ border: '1px solid #e2e8f0', borderRadius: 16, padding: 20, display: 'flex', flexDirection: 'column', gap: 12, height: 'fit-content' }}
           >
             <h3 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Plus size={18} color="#0b462d" /> Add New Listing (Free)
+              <Plus size={18} color="#18181b" /> Add New Listing (Free)
             </h3>
             <input
               required
@@ -379,7 +379,7 @@ export default function SellerDashboard({
                     gap: 6,
                     fontSize: 12,
                     fontWeight: 700,
-                    color: '#0b462d',
+                    color: '#18181b',
                     cursor: 'pointer',
                   }}
                 >
@@ -503,7 +503,7 @@ export default function SellerDashboard({
               {promoCodes.map((pc) => (
                 <div key={pc.code} style={{ display: 'flex', justifyContent: 'space-between', padding: 12, borderRadius: 10, background: '#f8fafc' }}>
                   <div>
-                    <strong style={{ color: '#0b462d' }}>{pc.code}</strong>
+                    <strong style={{ color: '#18181b' }}>{pc.code}</strong>
                     <div style={{ fontSize: 12, color: '#64748b' }}>{pc.label}</div>
                   </div>
                   <span style={{ fontWeight: 800, color: '#f58220' }}>{pc.discountPercent}% OFF</span>
@@ -557,7 +557,7 @@ export default function SellerDashboard({
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #e2e8f0', paddingTop: 8, fontSize: 15 }}>
                 <strong>Net Payout</strong>
-                <strong style={{ color: '#0b462d' }}>GH₵{completedRevenue.toFixed(2)}</strong>
+                <strong style={{ color: '#18181b' }}>GH₵{completedRevenue.toFixed(2)}</strong>
               </div>
             </div>
           </div>

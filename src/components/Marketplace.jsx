@@ -463,7 +463,7 @@ export default function Marketplace({
                 height: 36,
                 borderRadius: '50%',
                 border: '1px solid #cbd5e1',
-                background: safePage === n ? '#0b462d' : '#ffffff',
+                background: safePage === n ? '#18181b' : '#ffffff',
                 color: safePage === n ? '#ffffff' : '#18181b',
                 fontWeight: 700,
               }}

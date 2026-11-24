@@ -26,7 +26,7 @@ export default function ChatDrawer({ chatState, messages, onClose, onSendMessage
   return (
     <div className="drawer-backdrop" onClick={onClose}>
       <div className="drawer-panel" onClick={(e) => e.stopPropagation()}>
-        <div style={{ padding: '16px 20px', borderBottom: '1px solid #e2e8f0', background: '#133c31', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ padding: '16px 20px', borderBottom: '1px solid #e2e8f0', background: '#1c1a18', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <strong>{chatState.seller.name}</strong>
@@ -48,7 +48,7 @@ export default function ChatDrawer({ chatState, messages, onClose, onSendMessage
               style={{
                 alignSelf: msg.sender === 'buyer' ? 'flex-end' : 'flex-start',
                 maxWidth: '80%',
-                background: msg.sender === 'buyer' ? '#0b462d' : '#ffffff',
+                background: msg.sender === 'buyer' ? '#18181b' : '#ffffff',
                 color: msg.sender === 'buyer' ? '#ffffff' : '#18181b',
                 padding: '10px 14px',
                 borderRadius: 14,

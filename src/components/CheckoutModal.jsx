@@ -209,7 +209,7 @@ export default function CheckoutModal({
                 />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4, color: '#0b462d' }}>
+                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4, color: '#18181b' }}>
                   Safe Campus Meet-up Point
                 </label>
                 <select
@@ -263,7 +263,7 @@ export default function CheckoutModal({
                       fontSize: 13,
                       padding: '8px 10px',
                       borderRadius: 8,
-                      border: paymentMethod === method ? '1.5px solid #0b462d' : '1px solid #e2e8f0',
+                      border: paymentMethod === method ? '1.5px solid #18181b' : '1px solid #e2e8f0',
                       background: paymentMethod === method ? '#ecfdf5' : '#fff',
                       cursor: 'pointer',
                     }}
@@ -295,7 +295,7 @@ export default function CheckoutModal({
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 16, borderTop: '1px solid #e2e8f0', paddingTop: 10 }}>
                 <strong>Total</strong>
-                <strong style={{ color: '#0b462d' }}>GH₵{total.toFixed(2)}</strong>
+                <strong style={{ color: '#18181b' }}>GH₵{total.toFixed(2)}</strong>
               </div>
             </div>
 
@@ -304,7 +304,7 @@ export default function CheckoutModal({
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: '#64748b', justifyContent: 'center' }}>
-              <ShieldCheck size={14} color="#0b462d" />
+              <ShieldCheck size={14} color="#18181b" />
               Payouts are held safely until you confirm receipt.
             </div>
           </div>
